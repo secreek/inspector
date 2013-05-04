@@ -102,6 +102,7 @@
 		C14031811733F2F200FF4A85 /* Inspector */ = {
 			isa = PBXGroup;
 			children = (
+				C14031B91735443700FF4A85 /* ConfigFileReader */,
 				C14031981733F4A500FF4A85 /* OBMenuBarWindow */,
 				C140319C1733F5BD00FF4A85 /* Resources */,
 				C140318D1733F2F200FF4A85 /* AppDelegate.h */,
@@ -146,6 +147,13 @@
 				C140319F1733F5E100FF4A85 /* MenuBarIcon2.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		C14031B91735443700FF4A85 /* ConfigFileReader */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ConfigFileReader;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

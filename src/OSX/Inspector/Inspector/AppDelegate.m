@@ -20,9 +20,10 @@
 {
     self.window.hasMenuBarIcon = YES;
     self.window.attachedToMenuBar = YES;
-    [self.window.statusItemView.imageView setImage:[NSImage imageNamed:@"MenuBarIcon"]];
     
-    [self.window.statusItemView setHighlighted:YES];
+    [[[self statueItemView] imageView] setImage:[NSImage imageNamed:@"MenuBarIcon"]];
+    
+    [[self statueItemView] setHighlighted:YES];
     
     NSMenu *statusMenu = [[NSMenu alloc] initWithTitle:@"StatusMenu"];
     NSMenuItem *settingsMenuItem = [[NSMenuItem alloc] initWithTitle:@"Settings..." action:@selector(menuSettings) keyEquivalent:@""];
@@ -33,24 +34,29 @@
     NSMenuItem *aboutMenuItem = [[NSMenuItem alloc] initWithTitle:@"About Inspector" action:@selector(menuAbout) keyEquivalent:@""];
     [statusMenu addItem:aboutMenuItem];
     
-
     [statusMenu addItemWithTitle:@"Quit" action:@selector(menuQuit) keyEquivalent:@""];
     
-    [self.window.statusItemView setMenu:statusMenu];
+    [[self statueItemView] setMenu:statusMenu];
+}
+
+#pragma mark - helper
+
+- (GSImageScrollingTextView *)statueItemView {
+    return self.window.statusItemView;
 }
 
 #pragma mark - Menu
 
 - (void)menuSettings {
-    [self.window.statusItemView setText:@"Lorem lorem lorem lorem lorem."];
+    [[self statueItemView] setText:@"Lorem lorem lorem lorem lorem."];
 }
 
 - (void)menuAbout {
-    [self.window.statusItemView setText:@""];
+    [[self statueItemView] setText:@""];
 }
 
 - (void)menuQuit {
-    [self.window.statusItemView setText:@"Some text"];
+    [[self statueItemView] setText:@"Some text"];
 }
 
 @end
