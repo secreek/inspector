@@ -29,6 +29,7 @@
 //
 
 #import "OBMenuBarWindow.h"
+#import "GSImageScrollingTextView.h"
 #import <objc/runtime.h>
 
 NSString * const OBMenuBarWindowDidAttachToMenuBar = @"OBMenuBarWindowDidAttachToMenuBar";
@@ -69,6 +70,7 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
 @synthesize statusItem;
 @synthesize toolbarView;
 @synthesize titleTextField;
+@synthesize statusItemView;
 
 - (id)initWithContentRect:(NSRect)contentRect
                 styleMask:(NSUInteger)aStyle
@@ -222,8 +224,8 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
         {
             // Create the status item
             statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-            CGFloat thickness = [[NSStatusBar systemStatusBar] thickness];
-            statusItemView = [[OBMenuBarWindowIconView alloc] initWithFrame:NSMakeRect(0, 0, (self.menuBarIcon ? self.menuBarIcon.size.width : thickness) + 6, thickness)];
+            // CGFloat thickness = [[NSStatusBar systemStatusBar] thickness];
+            statusItemView = [[GSImageScrollingTextView alloc] initWithTextWidth:150];
             statusItemView.menuBarWindow = self;
             statusItem.view = statusItemView;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusItemViewDidMove:) name:NSWindowDidMoveNotification object:statusItem.view.window];
@@ -246,8 +248,9 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
     menuBarIcon = image;
     if (statusItemView)
     {
-        [statusItemView setFrameSize:NSMakeSize(image.size.width + 6, statusItemView.frame.size.height)];
-        [statusItemView setNeedsDisplay:YES];
+//        [statusItemView setFrameSize:NSMakeSize(image.size.width + 6, statusItemView.frame.size.height)];
+//        [statusItemView setNeedsDisplay:YES];
+        [statusItemView.imageView setImage:image];
     }
 }
 
@@ -449,6 +452,8 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
 - (void)windowDidBecomeKey:(NSNotification *)aNotification
 {
     [[self.contentView superview] setNeedsDisplayInRect:[self titleBarRect]];
+    
+    [statusItemView setHighlighted:YES];
 }
 
 - (void)windowDidResignKey:(NSNotification *)aNotification
@@ -458,6 +463,8 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
         [self orderOut:self];
     }
     [[self.contentView superview] setNeedsDisplayInRect:[self titleBarRect]];
+    
+    [statusItemView setHighlighted:NO];
 }
 
 #pragma mark - Showing the window
@@ -565,7 +572,7 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
 - (void)windowDidMove:(NSNotification *)aNotification
 {
     if (![self inLiveResize] && self.hasMenuBarIcon)
-    {
+    {   
         NSRect frame = [self frame];
         NSPoint arrowPoint = NSMakePoint(NSMidX(frame), NSMaxY(frame));
         NSRect statusItemFrame = [[statusItemView window] frame];
@@ -820,81 +827,6 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
                                       width,
                                       1);
     NSRectFill(separatorRect);
-}
-
-@end
-
-#pragma mark -
-
-@implementation OBMenuBarWindowIconView
-
-@synthesize menuBarWindow;
-@synthesize highlighted;
-
-#pragma mark - Highlighting
-
-- (void)setHighlighted:(BOOL)flag
-{
-    highlighted = flag;
-    [self setNeedsDisplay:YES];
-}
-
-#pragma mark - Mouse events
-
-- (void)mouseDown:(NSEvent *)theEvent
-{
-    self.highlighted = YES;
-    if ([self.menuBarWindow isMainWindow] || (self.menuBarWindow.isVisible && self.menuBarWindow.attachedToMenuBar))
-    {
-        [self.menuBarWindow orderOut:self];
-    }
-    else
-    {
-        [NSApp activateIgnoringOtherApps:YES];
-        [self.menuBarWindow makeKeyAndOrderFront:self];
-        
-        if ([self.menuBarWindow.obDelegate respondsToSelector:@selector(obWindowDidAppear:)]) {
-            [self.menuBarWindow.obDelegate obWindowDidAppear:self.menuBarWindow];
-        }
-    }
-}
-
-- (void)mouseUp:(NSEvent *)theEvent
-{
-    self.highlighted = NO;
-}
-
-#pragma mark - Drawing
-
-- (void)drawRect:(NSRect)dirtyRect
-{
-    if (self.highlighted)
-    {
-        [[NSColor selectedMenuItemColor] set];
-        NSRectFill([self bounds]);
-    }
-    if (self.menuBarWindow && self.menuBarWindow.menuBarIcon)
-    {
-        NSRect rect = NSMakeRect([self bounds].origin.x + 3,
-                                 [self bounds].origin.y,
-                                 [self bounds].size.width - 6,
-                                 [self bounds].size.height);
-        
-        if (self.highlighted && self.menuBarWindow.highlightedMenuBarIcon)
-        {
-            [self.menuBarWindow.highlightedMenuBarIcon drawInRect:rect
-                                                         fromRect:NSZeroRect
-                                                        operation:NSCompositeSourceOver
-                                                         fraction:1.0];
-        }
-        else
-        {
-            [self.menuBarWindow.menuBarIcon drawInRect:rect
-                                              fromRect:NSZeroRect
-                                             operation:NSCompositeSourceOver
-                                              fraction:1.0];
-        }
-    }
 }
 
 @end

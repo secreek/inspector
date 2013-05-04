@@ -7,12 +7,24 @@
 //
 
 #import "AppDelegate.h"
+#import "GSImageScrollingTextView.h"
+#import "OBMenuBarWindow.h"
+
+@interface AppDelegate ()
+
+@property (strong, nonatomic) GSImageScrollingTextView *imageScrollingTextView;
+
+@end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    self.window.hasMenuBarIcon = YES;
+    self.window.attachedToMenuBar = YES;
+    [self.window.statusItemView.imageView setImage:[NSImage imageNamed:@"MenuBarIcon"]];
+    
+    [self.window.statusItemView setHighlighted:YES];
 }
 
 @end

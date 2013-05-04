@@ -39,7 +39,7 @@ extern const CGFloat OBMenuBarWindowTitleBarHeight;
 extern const CGFloat OBMenuBarWindowArrowHeight;
 extern const CGFloat OBMenuBarWindowArrowWidth;
 
-@class OBMenuBarWindowIconView;
+@class GSImageScrollingTextView;
 
 /** The `OBMenuBarWindow` class is an `NSWindow` subclass that adds the ability
  to attach the window to an icon in the menu bar. It emulates much of the look
@@ -91,7 +91,6 @@ extern const CGFloat OBMenuBarWindowArrowWidth;
     NSTextField *titleTextField;
     NSImage *noiseImage;
     NSStatusItem *statusItem;
-    OBMenuBarWindowIconView *statusItemView;
 }
 
 @property (weak, nonatomic) id<OBMenuBarWindowDelegate> obDelegate;
@@ -133,17 +132,7 @@ extern const CGFloat OBMenuBarWindowArrowWidth;
 /** The window's title text field. */
 @property (readonly) NSTextField *titleTextField;
 
-@end
-
-/** The `OBStatusItemView` class handles drawing and interacting with the menu
- bar icon of an `OBMenuBarWindow`. */
-@interface OBMenuBarWindowIconView : NSView
-
-/** The window attached to the menu bar item. */
-@property (assign) OBMenuBarWindow *menuBarWindow;
-
-/** Whether the menu bar icon is highlighted. */
-@property (nonatomic, assign) BOOL highlighted;
+@property (strong, nonatomic) GSImageScrollingTextView *statusItemView;
 
 @end
 

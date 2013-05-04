@@ -7,9 +7,10 @@
 //
 
 #import <Cocoa/Cocoa.h>
+@class OBMenuBarWindow;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet OBMenuBarWindow *window;
 
 @end

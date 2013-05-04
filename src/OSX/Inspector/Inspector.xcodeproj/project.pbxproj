@@ -14,6 +14,12 @@
 		C140318F1733F2F200FF4A85 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C140318E1733F2F200FF4A85 /* AppDelegate.m */; };
 		C14031921733F2F200FF4A85 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = C14031901733F2F200FF4A85 /* MainMenu.xib */; };
 		C140319B1733F4A500FF4A85 /* OBMenuBarWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = C140319A1733F4A500FF4A85 /* OBMenuBarWindow.m */; };
+		C140319E1733F5BD00FF4A85 /* MenuBarIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = C140319D1733F5BD00FF4A85 /* MenuBarIcon.png */; };
+		C14031A01733F5E100FF4A85 /* MenuBarIcon2.png in Resources */ = {isa = PBXBuildFile; fileRef = C140319F1733F5E100FF4A85 /* MenuBarIcon2.png */; };
+		C14031A91734CBF800FF4A85 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C14031A81734CBF800FF4A85 /* QuartzCore.framework */; };
+		C14031B01734FC7400FF4A85 /* GSImageScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031AA1734FC7400FF4A85 /* GSImageScrollingTextView.m */; };
+		C14031B21734FC7400FF4A85 /* FBScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031AC1734FC7400FF4A85 /* FBScrollingTextView.m */; };
+		C14031B81734FCF800FF4A85 /* GSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031B71734FCF800FF4A85 /* GSImageView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +38,15 @@
 		C14031911733F2F200FF4A85 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		C14031991733F4A500FF4A85 /* OBMenuBarWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OBMenuBarWindow.h; sourceTree = "<group>"; };
 		C140319A1733F4A500FF4A85 /* OBMenuBarWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OBMenuBarWindow.m; sourceTree = "<group>"; };
+		C140319D1733F5BD00FF4A85 /* MenuBarIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBarIcon.png; sourceTree = "<group>"; };
+		C140319F1733F5E100FF4A85 /* MenuBarIcon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MenuBarIcon2.png; sourceTree = "<group>"; };
+		C14031A81734CBF800FF4A85 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		C14031AA1734FC7400FF4A85 /* GSImageScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSImageScrollingTextView.m; sourceTree = "<group>"; };
+		C14031AC1734FC7400FF4A85 /* FBScrollingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBScrollingTextView.m; sourceTree = "<group>"; };
+		C14031AD1734FC7400FF4A85 /* FBScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBScrollingTextView.h; sourceTree = "<group>"; };
+		C14031AF1734FC7400FF4A85 /* GSImageScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSImageScrollingTextView.h; sourceTree = "<group>"; };
+		C14031B61734FCF800FF4A85 /* GSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSImageView.h; sourceTree = "<group>"; };
+		C14031B71734FCF800FF4A85 /* GSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSImageView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C14031A91734CBF800FF4A85 /* QuartzCore.framework in Frameworks */,
 				C140317C1733F2F200FF4A85 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +82,7 @@
 		C140317A1733F2F200FF4A85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C14031A81734CBF800FF4A85 /* QuartzCore.framework */,
 				C140317B1733F2F200FF4A85 /* Cocoa.framework */,
 				C140317D1733F2F200FF4A85 /* Other Frameworks */,
 			);
@@ -86,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				C14031981733F4A500FF4A85 /* OBMenuBarWindow */,
+				C140319C1733F5BD00FF4A85 /* Resources */,
 				C140318D1733F2F200FF4A85 /* AppDelegate.h */,
 				C140318E1733F2F200FF4A85 /* AppDelegate.m */,
 				C14031901733F2F200FF4A85 /* MainMenu.xib */,
@@ -111,8 +129,23 @@
 			children = (
 				C14031991733F4A500FF4A85 /* OBMenuBarWindow.h */,
 				C140319A1733F4A500FF4A85 /* OBMenuBarWindow.m */,
+				C14031AD1734FC7400FF4A85 /* FBScrollingTextView.h */,
+				C14031AC1734FC7400FF4A85 /* FBScrollingTextView.m */,
+				C14031AF1734FC7400FF4A85 /* GSImageScrollingTextView.h */,
+				C14031AA1734FC7400FF4A85 /* GSImageScrollingTextView.m */,
+				C14031B61734FCF800FF4A85 /* GSImageView.h */,
+				C14031B71734FCF800FF4A85 /* GSImageView.m */,
 			);
 			path = OBMenuBarWindow;
+			sourceTree = "<group>";
+		};
+		C140319C1733F5BD00FF4A85 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C140319D1733F5BD00FF4A85 /* MenuBarIcon.png */,
+				C140319F1733F5E100FF4A85 /* MenuBarIcon2.png */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,6 +202,8 @@
 				C14031861733F2F200FF4A85 /* InfoPlist.strings in Resources */,
 				C140318C1733F2F200FF4A85 /* Credits.rtf in Resources */,
 				C14031921733F2F200FF4A85 /* MainMenu.xib in Resources */,
+				C140319E1733F5BD00FF4A85 /* MenuBarIcon.png in Resources */,
+				C14031A01733F5E100FF4A85 /* MenuBarIcon2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +217,9 @@
 				C14031881733F2F200FF4A85 /* main.m in Sources */,
 				C140318F1733F2F200FF4A85 /* AppDelegate.m in Sources */,
 				C140319B1733F4A500FF4A85 /* OBMenuBarWindow.m in Sources */,
+				C14031B01734FC7400FF4A85 /* GSImageScrollingTextView.m in Sources */,
+				C14031B21734FC7400FF4A85 /* FBScrollingTextView.m in Sources */,
+				C14031B81734FCF800FF4A85 /* GSImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
