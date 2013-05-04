@@ -25,6 +25,32 @@
     [self.window.statusItemView.imageView setImage:[NSImage imageNamed:@"MenuBarIcon"]];
     
     [self.window.statusItemView setHighlighted:YES];
+    
+    NSMenu *statusMenu = [[NSMenu alloc] initWithTitle:@"StatusMenu"];
+    NSMenuItem *settingsMenuItem = [[NSMenuItem alloc] initWithTitle:@"Settings..." action:@selector(menuSettings) keyEquivalent:@""];
+    
+    [statusMenu addItem:settingsMenuItem];
+    [statusMenu addItem:[NSMenuItem separatorItem]];
+    
+    NSMenuItem *aboutMenuItem = [[NSMenuItem alloc] initWithTitle:@"About Inspector" action:@selector(menuAbout) keyEquivalent:@""];
+    [statusMenu addItem:aboutMenuItem];
+    
+
+    [statusMenu addItemWithTitle:@"Quit" action:@selector(menuQuit) keyEquivalent:@""];
+    
+    [self.window.statusItemView setMenu:statusMenu];
+}
+
+- (void)menuSettings {
+    
+}
+
+- (void)menuAbout {
+    
+}
+
+- (void)menuQuit {
+    
 }
 
 @end

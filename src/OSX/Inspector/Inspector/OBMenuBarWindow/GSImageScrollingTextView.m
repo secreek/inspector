@@ -36,13 +36,10 @@
 }
 
 - (void)mouseDown:(NSEvent *)theEvent {
-//    self.highlighted = YES;
-    if ([self.menuBarWindow isMainWindow] || (self.menuBarWindow.isVisible && self.menuBarWindow.attachedToMenuBar))
-    {
+    if ([self.menuBarWindow isMainWindow] || (self.menuBarWindow.isVisible && self.menuBarWindow.attachedToMenuBar)) {
         [self.menuBarWindow orderOut:self];
     }
-    else
-    {
+    else {
         [NSApp activateIgnoringOtherApps:YES];
         [self.menuBarWindow makeKeyAndOrderFront:self];
         
@@ -52,18 +49,18 @@
     }
 }
 
-- (void)mouseUp:(NSEvent *)theEvent {
-//    self.highlighted = NO;
+- (void)rightMouseDown:(NSEvent *)theEvent {
+    if ([self.menuBarWindow isMainWindow] || (self.menuBarWindow.isVisible && self.menuBarWindow.attachedToMenuBar)) {
+        [self.menuBarWindow orderOut:self];
+    }
+    
+    [self.menuBarWindow.statusItem popUpStatusItemMenu:self.menu];
+    
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
     [_scrollingTextView setHighlighted:highlighted];
     [_imageView setHighlighted:highlighted];
 }
-
-//- (void)drawRect:(NSRect)dirtyRect
-//{
-//    // Drawing code here.
-//}
 
 @end
