@@ -12,8 +12,6 @@
 
 @interface AppDelegate ()
 
-@property (strong, nonatomic) GSImageScrollingTextView *imageScrollingTextView;
-
 @end
 
 @implementation AppDelegate
@@ -41,16 +39,18 @@
     [self.window.statusItemView setMenu:statusMenu];
 }
 
+#pragma mark - Menu
+
 - (void)menuSettings {
-    
+    [self.window.statusItemView setText:@"Lorem lorem lorem lorem lorem."];
 }
 
 - (void)menuAbout {
-    
+    [self.window.statusItemView setText:@""];
 }
 
 - (void)menuQuit {
-    
+    [self.window.statusItemView setText:@"Some text"];
 }
 
 @end

@@ -25,4 +25,8 @@
     [super drawRect:dirtyRect];
 }
 
+- (void)rightMouseDown:(NSEvent *)theEvent {
+    [self.superview rightMouseDown:theEvent];
+}
+
 @end

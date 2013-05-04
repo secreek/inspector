@@ -24,4 +24,9 @@
 
 @property (assign, nonatomic) BOOL highlighted;
 
+@property (assign, nonatomic) CGFloat maxWidth;
+
+- (void)startScrolling;
+- (void)stopScrolling;
+
 @end

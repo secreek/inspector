@@ -225,7 +225,7 @@ const CGFloat OBMenuBarWindowArrowWidth = 20.0;
             // Create the status item
             statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
             // CGFloat thickness = [[NSStatusBar systemStatusBar] thickness];
-            statusItemView = [[GSImageScrollingTextView alloc] initWithTextWidth:150];
+            statusItemView = [[GSImageScrollingTextView alloc] initWithMaxTextWidth:150];
             statusItemView.menuBarWindow = self;
             statusItem.view = statusItemView;
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusItemViewDidMove:) name:NSWindowDidMoveNotification object:statusItem.view.window];

@@ -14,7 +14,7 @@
 
 @implementation GSImageScrollingTextView
 
-- (id)initWithTextWidth:(CGFloat)width {
+- (id)initWithMaxTextWidth:(CGFloat)width {
     self = [super initWithFrame:CGRectMake(0, 0, width + 22, 22)];
     if (self) {
 //        [self setWantsLayer:YES];
@@ -27,7 +27,12 @@
         
         self.scrollingTextView = [[FBScrollingTextView alloc] initWithFrame:CGRectMake(22, 0, width, 22)];
         [_scrollingTextView setFont:[NSFont systemFontOfSize:13.0f]];
-        [_scrollingTextView setString:@"Some long long long text"];
+//        [_scrollingTextView setString:@"Some long long long text"];
+//        [_scrollingTextView setString:@"Some text"];
+        [_scrollingTextView setString:@""];
+        
+        [self setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];
+        
         
         [self addSubview:_imageView];
         [self addSubview:_scrollingTextView];
@@ -65,6 +70,13 @@
 - (void)setHighlighted:(BOOL)highlighted {
     [_scrollingTextView setHighlighted:highlighted];
     [_imageView setHighlighted:highlighted];
+}
+
+- (void)setText:(NSString *)text {
+    [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+        [_scrollingTextView setString:text];
+        [[self animator] setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];
+    } completionHandler:nil];
 }
 
 #pragma mark NSMenu delegate

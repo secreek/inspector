@@ -29,6 +29,10 @@
 	tickTockStartScrolling = nil;
 }
 
+- (void)stopScrolling {
+    [tickTockScroll invalidate];
+    tickTockScroll = nil;
+}
 
 - (CGFloat)stringWidth {
 	if (!string) return 0;
@@ -36,16 +40,16 @@
 	return stringSize.width;
 }
 
-
 - (id)initWithFrame:(CGRect)frame {
     
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code.			
 		scrollingSpeed = kFBScrollingTextViewDefaultScrollingSpeed;
-		refreshRate = 0.05;	
+		refreshRate = 0.05;
 		cursor = NSMakePoint(0, 0);
 		self.font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
+        self.maxWidth = frame.size.width;
     }
     return self;
 }
@@ -64,13 +68,17 @@
 	cursor = NSMakePoint(0, 0);
 	string = _string;
 	CGRect thisFrame = [super frame];
-	if ([self stringWidth] > thisFrame.size.width) {
+    CGFloat stringWidth = [self stringWidth];
+	if (stringWidth > thisFrame.size.width) {
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _maxWidth, self.frame.size.height)];
 		if (!tickTockStartScrolling) {
 			tickTockStartScrolling = [NSTimer scheduledTimerWithTimeInterval:kFBScrollingTextViewStartScrollingDelay target:self selector:@selector(startScrolling) userInfo:nil repeats:NO];
 		}		
-	} 
+	}
+    else {
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, stringWidth, self.frame.size.height)];
+    }
 	[self setNeedsDisplay:YES];
-		
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
@@ -83,6 +91,7 @@
     // Drawing code.
     
     if (_highlighted) {
+//        NSLog(@"%@", [NSColor selectedMenuItemColor]);
         [[NSColor selectedMenuItemColor] set];
         NSRectFill([self bounds]);
     }
