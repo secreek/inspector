@@ -35,6 +35,8 @@
     return self;
 }
 
+#pragma mark - Mouse Event
+
 - (void)mouseDown:(NSEvent *)theEvent {
     if ([self.menuBarWindow isMainWindow] || (self.menuBarWindow.isVisible && self.menuBarWindow.attachedToMenuBar)) {
         [self.menuBarWindow orderOut:self];
@@ -55,12 +57,24 @@
     }
     
     [self.menuBarWindow.statusItem popUpStatusItemMenu:self.menu];
-    
+    [self.menu setDelegate:self];
 }
+
+#pragma mark setter
 
 - (void)setHighlighted:(BOOL)highlighted {
     [_scrollingTextView setHighlighted:highlighted];
     [_imageView setHighlighted:highlighted];
+}
+
+#pragma mark NSMenu delegate
+
+- (void)menuWillOpen:(NSMenu *)menu {
+    [self setHighlighted:YES];
+}
+
+- (void)menuDidClose:(NSMenu *)menu {
+    [self setHighlighted:NO];
 }
 
 @end

@@ -14,6 +14,9 @@
 @class GSImageView;
 
 @interface GSImageScrollingTextView : NSView
+<
+NSMenuDelegate
+>
 
 @property (strong, nonatomic) FBScrollingTextView *scrollingTextView;
 @property (strong, nonatomic) GSImageView *imageView;
