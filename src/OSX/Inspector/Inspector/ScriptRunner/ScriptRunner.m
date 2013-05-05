@@ -7,6 +7,7 @@
 //
 
 #import "ScriptRunner.h"
+#import <AFNetworking.h>
 
 @interface ScriptRunner ()
 
@@ -16,7 +17,7 @@
 
 @implementation ScriptRunner
 
-- (id)initWithScriptURL:(NSURL *)url refresh:(BOOL)refresh delay:(NSTimeInterval) delay {
+- (id)initWithScriptURL:(NSURL *)url refresh:(BOOL)refresh {
     self = [super init];
     if (self) {
         self.type = ScriptRunnerType_Script;
@@ -24,12 +25,20 @@
     return self;
 }
 
-- (id)initWithCommand:(NSString *)command delay:(NSTimeInterval) delay {
+- (id)initWithCommand:(NSString *)command {
     self = [super init];
     if (self) {
         self.type = ScriptRunnerType_Command;
     }
     return self;
+}
+
+- (void)runWithTimeInterval:(NSTimeInterval) timeInterval {
+    
+}
+
+- (void)stop {
+    
 }
 
 @end
