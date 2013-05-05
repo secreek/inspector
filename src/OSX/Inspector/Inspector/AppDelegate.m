@@ -46,6 +46,7 @@
 
 - (void)testConfigFileReader {
     ConfigFileReader *reader = [[ConfigFileReader alloc] initWithInspFolderPath:@"/Users/ultragtx/Desktop/test.insp"];
+    [reader normalIcon];
 }
 
 #pragma mark - helper
