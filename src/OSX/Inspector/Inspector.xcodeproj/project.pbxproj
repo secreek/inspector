@@ -20,6 +20,8 @@
 		C14031B01734FC7400FF4A85 /* GSImageScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031AA1734FC7400FF4A85 /* GSImageScrollingTextView.m */; };
 		C14031B21734FC7400FF4A85 /* FBScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031AC1734FC7400FF4A85 /* FBScrollingTextView.m */; };
 		C14031B81734FCF800FF4A85 /* GSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031B71734FCF800FF4A85 /* GSImageView.m */; };
+		C14031BD1736839500FF4A85 /* ConfigFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031BC1736839500FF4A85 /* ConfigFileReader.m */; };
+		C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,11 @@
 		C14031AF1734FC7400FF4A85 /* GSImageScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSImageScrollingTextView.h; sourceTree = "<group>"; };
 		C14031B61734FCF800FF4A85 /* GSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSImageView.h; sourceTree = "<group>"; };
 		C14031B71734FCF800FF4A85 /* GSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSImageView.m; sourceTree = "<group>"; };
+		C14031BB1736839500FF4A85 /* ConfigFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileReader.h; sourceTree = "<group>"; };
+		C14031BC1736839500FF4A85 /* ConfigFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileReader.m; sourceTree = "<group>"; };
+		C14031BF173685F500FF4A85 /* INSPLogUtlils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSPLogUtlils.h; sourceTree = "<group>"; };
+		C14031C01736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+IZM_JSONSupport.h"; sourceTree = "<group>"; };
+		C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+IZM_JSONSupport.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +109,8 @@
 		C14031811733F2F200FF4A85 /* Inspector */ = {
 			isa = PBXGroup;
 			children = (
-				C14031B91735443700FF4A85 /* ConfigFileReader */,
+				C14031BE173685F500FF4A85 /* Utils */,
+				C14031BA1736837200FF4A85 /* ConfigFileManage */,
 				C14031981733F4A500FF4A85 /* OBMenuBarWindow */,
 				C140319C1733F5BD00FF4A85 /* Resources */,
 				C140318D1733F2F200FF4A85 /* AppDelegate.h */,
@@ -149,11 +157,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		C14031B91735443700FF4A85 /* ConfigFileReader */ = {
+		C14031BA1736837200FF4A85 /* ConfigFileManage */ = {
 			isa = PBXGroup;
 			children = (
+				C14031BB1736839500FF4A85 /* ConfigFileReader.h */,
+				C14031BC1736839500FF4A85 /* ConfigFileReader.m */,
 			);
-			path = ConfigFileReader;
+			path = ConfigFileManage;
+			sourceTree = "<group>";
+		};
+		C14031BE173685F500FF4A85 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C14031BF173685F500FF4A85 /* INSPLogUtlils.h */,
+				C14031C01736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.h */,
+				C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -228,6 +248,8 @@
 				C14031B01734FC7400FF4A85 /* GSImageScrollingTextView.m in Sources */,
 				C14031B21734FC7400FF4A85 /* FBScrollingTextView.m in Sources */,
 				C14031B81734FCF800FF4A85 /* GSImageView.m in Sources */,
+				C14031BD1736839500FF4A85 /* ConfigFileReader.m in Sources */,
+				C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +385,7 @@
 				C14031971733F2F200FF4A85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

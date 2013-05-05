@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "GSImageScrollingTextView.h"
 #import "OBMenuBarWindow.h"
+#import "ConfigFileReader.h"
 
 @interface AppDelegate ()
 
@@ -37,6 +38,14 @@
     [statusMenu addItemWithTitle:@"Quit" action:@selector(menuQuit) keyEquivalent:@""];
     
     [[self statueItemView] setMenu:statusMenu];
+    
+    [self testConfigFileReader];
+}
+
+#pragma mark - ConfigFileReader test
+
+- (void)testConfigFileReader {
+    ConfigFileReader *reader = [[ConfigFileReader alloc] initWithInspFolderPath:@"/Users/ultragtx/Desktop/test.insp"];
 }
 
 #pragma mark - helper
