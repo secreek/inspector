@@ -13,14 +13,36 @@ typedef enum {
     ScriptRunnerType_Command,
 }ScriptRunnerType;;
 
+@protocol ScriptRunnerDelegate;
+
 @interface ScriptRunner : NSObject
+
+@property (weak, nonatomic) id<ScriptRunnerDelegate> delegate;
 
 @property (readonly, nonatomic) ScriptRunnerType type;
 
-- (id)initWithScriptURL:(NSURL *)url refresh:(BOOL)refresh;
+@property (readonly, nonatomic) NSURL *scriptURL;
+@property (readonly, nonatomic) BOOL refreshScript;
+@property (readonly, nonatomic) NSString *command;
+
+- (id)initWithScriptPath:(NSString *)path refresh:(BOOL)refresh;
 - (id)initWithCommand:(NSString *)command;
+
+- (void)prepare;
 
 - (void)runWithTimeInterval:(NSTimeInterval) timeInterval;
 - (void)stop;
+
+@end
+
+@protocol ScriptRunnerDelegate <NSObject>
+
+//- (void)scriptRunner:(ScriptRunner *)runner didFinishRunningScript:(NSURL *)scriptPath;
+- (void)scriptRunner:(ScriptRunner *)runner didFailDownloadingScriptWithError:(NSError *)error;
+
+@optional
+
+- (void)scriptRunner:(ScriptRunner *)runner didGetScriptContent:(NSString *)content;
+- (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithResult:(NSString *)result;
 
 @end

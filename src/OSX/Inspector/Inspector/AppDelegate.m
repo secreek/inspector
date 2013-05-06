@@ -10,6 +10,7 @@
 #import "GSImageScrollingTextView.h"
 #import "OBMenuBarWindow.h"
 #import "ConfigFileReader.h"
+#import "ScriptRunner.h"
 
 @interface AppDelegate ()
 
@@ -40,6 +41,7 @@
     [[self statueItemView] setMenu:statusMenu];
     
     [self testConfigFileReader];
+    [self testScriptRunner];
 }
 
 #pragma mark - ConfigFileReader test
@@ -47,6 +49,15 @@
 - (void)testConfigFileReader {
     ConfigFileReader *reader = [[ConfigFileReader alloc] initWithInspFolderPath:@"/Users/ultragtx/Desktop/test.insp"];
     [reader normalIcon];
+}
+
+- (void)testScriptRunner {
+    ScriptRunner *runner = [[ScriptRunner alloc] initWithScriptPath:@"/Users/ultragtx/Desktop/test.insp/test.sh" refresh:NO];
+
+//    ScriptRunner *runner = [[ScriptRunner alloc] initWithScriptPath:@"http://example.org/run.sh" refresh:NO];
+    
+    [runner prepare];
+    
 }
 
 #pragma mark - helper
