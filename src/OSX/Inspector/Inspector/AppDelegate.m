@@ -9,8 +9,12 @@
 #import "AppDelegate.h"
 #import "GSImageScrollingTextView.h"
 #import "OBMenuBarWindow.h"
+#import "ConfigFileReader.h"
+#import "ScriptRunner.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) ScriptRunner *runner;
 
 @end
 
@@ -37,6 +41,8 @@
     [statusMenu addItemWithTitle:@"Quit" action:@selector(menuQuit) keyEquivalent:@""];
     
     [[self statueItemView] setMenu:statusMenu];
+    
+    [self runTest];
 }
 
 #pragma mark - helper
@@ -57,6 +63,39 @@
 
 - (void)menuQuit {
     [[self statueItemView] setText:@"Some text"];
+}
+
+#pragma mark - For Tests
+
+- (void)runTest {
+    [self testConfigFileReader];
+    [self testScriptRunner];
+    //    [self testCommandRunner];
+    
+    [self performSelector:@selector(stopRunner) withObject:nil afterDelay:10];
+}
+
+- (void)testConfigFileReader {
+    ConfigFileReader *reader = [[ConfigFileReader alloc] initWithInspFolderPath:@"/Users/ultragtx/Desktop/test.insp"];
+    [reader normalIcon];
+}
+
+- (void)testScriptRunner {
+    _runner = [[ScriptRunner alloc] initWithScriptPath:@"/Users/ultragtx/Desktop/test.insp/test.sh" refresh:NO];
+    
+    //    ScriptRunner *runner = [[ScriptRunner alloc] initWithScriptPath:@"http://example.org/run.sh" refresh:NO];
+    
+    [_runner runWithTimeInterval:2];
+}
+
+- (void)testCommandRunner {
+    _runner = [[ScriptRunner alloc] initWithCommand:@"ls -a"];
+    
+    [_runner runWithTimeInterval:2];
+}
+
+- (void)stopRunner {
+    [_runner stop];
 }
 
 @end

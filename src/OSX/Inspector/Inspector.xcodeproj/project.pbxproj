@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		838AD1D6564D40C184C756B7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71EFCA0DFCB0469B8D3179C3 /* libPods.a */; };
+		C132EDC717373D6C0082DABD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C132EDC617373D6C0082DABD /* SystemConfiguration.framework */; };
+		C132EDCA173742000082DABD /* LogGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C132EDC9173742000082DABD /* LogGetter.m */; };
 		C140317C1733F2F200FF4A85 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C140317B1733F2F200FF4A85 /* Cocoa.framework */; };
 		C14031861733F2F200FF4A85 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C14031841733F2F200FF4A85 /* InfoPlist.strings */; };
 		C14031881733F2F200FF4A85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031871733F2F200FF4A85 /* main.m */; };
@@ -20,9 +23,17 @@
 		C14031B01734FC7400FF4A85 /* GSImageScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031AA1734FC7400FF4A85 /* GSImageScrollingTextView.m */; };
 		C14031B21734FC7400FF4A85 /* FBScrollingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031AC1734FC7400FF4A85 /* FBScrollingTextView.m */; };
 		C14031B81734FCF800FF4A85 /* GSImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031B71734FCF800FF4A85 /* GSImageView.m */; };
+		C14031BD1736839500FF4A85 /* ConfigFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031BC1736839500FF4A85 /* ConfigFileReader.m */; };
+		C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */; };
+		C14031C61736947700FF4A85 /* ScriptRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C51736947700FF4A85 /* ScriptRunner.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B03BD546F294361ADD31925 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		71EFCA0DFCB0469B8D3179C3 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C132EDC617373D6C0082DABD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C132EDC8173742000082DABD /* LogGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogGetter.h; sourceTree = "<group>"; };
+		C132EDC9173742000082DABD /* LogGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogGetter.m; sourceTree = "<group>"; };
 		C14031781733F2F200FF4A85 /* Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C140317B1733F2F200FF4A85 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C140317E1733F2F200FF4A85 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -47,6 +58,13 @@
 		C14031AF1734FC7400FF4A85 /* GSImageScrollingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSImageScrollingTextView.h; sourceTree = "<group>"; };
 		C14031B61734FCF800FF4A85 /* GSImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSImageView.h; sourceTree = "<group>"; };
 		C14031B71734FCF800FF4A85 /* GSImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSImageView.m; sourceTree = "<group>"; };
+		C14031BB1736839500FF4A85 /* ConfigFileReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFileReader.h; sourceTree = "<group>"; };
+		C14031BC1736839500FF4A85 /* ConfigFileReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFileReader.m; sourceTree = "<group>"; };
+		C14031BF173685F500FF4A85 /* INSPLogUtlils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INSPLogUtlils.h; sourceTree = "<group>"; };
+		C14031C01736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+IZM_JSONSupport.h"; sourceTree = "<group>"; };
+		C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+IZM_JSONSupport.m"; sourceTree = "<group>"; };
+		C14031C41736947700FF4A85 /* ScriptRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptRunner.h; sourceTree = "<group>"; };
+		C14031C51736947700FF4A85 /* ScriptRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptRunner.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,8 +72,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C132EDC717373D6C0082DABD /* SystemConfiguration.framework in Frameworks */,
 				C14031A91734CBF800FF4A85 /* QuartzCore.framework in Frameworks */,
 				C140317C1733F2F200FF4A85 /* Cocoa.framework in Frameworks */,
+				838AD1D6564D40C184C756B7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +88,7 @@
 				C14031811733F2F200FF4A85 /* Inspector */,
 				C140317A1733F2F200FF4A85 /* Frameworks */,
 				C14031791733F2F200FF4A85 /* Products */,
+				5B03BD546F294361ADD31925 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,9 +103,11 @@
 		C140317A1733F2F200FF4A85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C132EDC617373D6C0082DABD /* SystemConfiguration.framework */,
 				C14031A81734CBF800FF4A85 /* QuartzCore.framework */,
 				C140317B1733F2F200FF4A85 /* Cocoa.framework */,
 				C140317D1733F2F200FF4A85 /* Other Frameworks */,
+				71EFCA0DFCB0469B8D3179C3 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -102,8 +125,10 @@
 		C14031811733F2F200FF4A85 /* Inspector */ = {
 			isa = PBXGroup;
 			children = (
-				C14031B91735443700FF4A85 /* ConfigFileReader */,
+				C14031C31736945B00FF4A85 /* ScriptRunner */,
+				C14031BA1736837200FF4A85 /* ConfigFileManage */,
 				C14031981733F4A500FF4A85 /* OBMenuBarWindow */,
+				C14031BE173685F500FF4A85 /* Utils */,
 				C140319C1733F5BD00FF4A85 /* Resources */,
 				C140318D1733F2F200FF4A85 /* AppDelegate.h */,
 				C140318E1733F2F200FF4A85 /* AppDelegate.m */,
@@ -149,11 +174,34 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		C14031B91735443700FF4A85 /* ConfigFileReader */ = {
+		C14031BA1736837200FF4A85 /* ConfigFileManage */ = {
 			isa = PBXGroup;
 			children = (
+				C14031BB1736839500FF4A85 /* ConfigFileReader.h */,
+				C14031BC1736839500FF4A85 /* ConfigFileReader.m */,
 			);
-			path = ConfigFileReader;
+			path = ConfigFileManage;
+			sourceTree = "<group>";
+		};
+		C14031BE173685F500FF4A85 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C14031BF173685F500FF4A85 /* INSPLogUtlils.h */,
+				C14031C01736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.h */,
+				C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		C14031C31736945B00FF4A85 /* ScriptRunner */ = {
+			isa = PBXGroup;
+			children = (
+				C14031C41736947700FF4A85 /* ScriptRunner.h */,
+				C14031C51736947700FF4A85 /* ScriptRunner.m */,
+				C132EDC8173742000082DABD /* LogGetter.h */,
+				C132EDC9173742000082DABD /* LogGetter.m */,
+			);
+			path = ScriptRunner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,6 +214,7 @@
 				C14031741733F2F200FF4A85 /* Sources */,
 				C14031751733F2F200FF4A85 /* Frameworks */,
 				C14031761733F2F200FF4A85 /* Resources */,
+				90985AE263C6449590D0FAD9 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -217,6 +266,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		90985AE263C6449590D0FAD9 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C14031741733F2F200FF4A85 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -228,6 +294,10 @@
 				C14031B01734FC7400FF4A85 /* GSImageScrollingTextView.m in Sources */,
 				C14031B21734FC7400FF4A85 /* FBScrollingTextView.m in Sources */,
 				C14031B81734FCF800FF4A85 /* GSImageView.m in Sources */,
+				C14031BD1736839500FF4A85 /* ConfigFileReader.m in Sources */,
+				C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */,
+				C14031C61736947700FF4A85 /* ScriptRunner.m in Sources */,
+				C132EDCA173742000082DABD /* LogGetter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +392,7 @@
 		};
 		C14031961733F2F200FF4A85 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B03BD546F294361ADD31925 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -334,6 +405,7 @@
 		};
 		C14031971733F2F200FF4A85 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B03BD546F294361ADD31925 /* Pods.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -363,6 +435,7 @@
 				C14031971733F2F200FF4A85 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
