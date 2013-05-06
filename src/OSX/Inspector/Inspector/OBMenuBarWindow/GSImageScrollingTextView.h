@@ -21,7 +21,7 @@ NSMenuDelegate
 @property (strong, nonatomic) FBScrollingTextView *scrollingTextView;
 @property (strong, nonatomic) GSImageView *imageView;
 
-@property (weak, nonatomic) OBMenuBarWindow *menuBarWindow;
+@property (assign, nonatomic) OBMenuBarWindow *menuBarWindow;
 @property (assign, nonatomic) BOOL highlighted;
 
 - (id)initWithMaxTextWidth:(CGFloat)width;
