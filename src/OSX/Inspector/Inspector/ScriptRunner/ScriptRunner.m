@@ -18,12 +18,16 @@
 @property (strong, nonatomic) NSString *command;
 @property (strong, nonatomic) NSString *scriptFileName;
 @property (strong, nonatomic) NSString *scriptContent;
+@property (assign, nonatomic) NSTimeInterval timeInterval;
 
 @property (assign, nonatomic) BOOL isRunning;
+@property (assign, atomic) NSTimeInterval lastExecuteTime;
 
 @end
 
-@implementation ScriptRunner
+@implementation ScriptRunner {
+    dispatch_queue_t _excuteQueue;
+}
 
 - (id)initWithScriptPath:(NSString *)path refresh:(BOOL)refresh {
     self = [super init];
@@ -43,6 +47,8 @@
         
         NSLog(@"--%@", _scriptURL);
         NSLog(@"--%@", _scriptFileName);
+        
+        [self commonInitialize];
     }
     return self;
 }
@@ -53,8 +59,15 @@
         self.type = ScriptRunnerType_Command;
         
         self.command = command;
+        
+        [self commonInitialize];
     }
     return self;
+}
+
+- (void)commonInitialize {
+    // create dispatch queue
+    _excuteQueue = dispatch_queue_create("ExecuteQueue", NULL);
 }
 
 #pragma mark - Control
@@ -63,18 +76,62 @@
     if (_type == ScriptRunnerType_Script) {
         [self downloadScript];
     }
+    else {
+        [self asyncExecute];
+    }
 }
 
 - (void)runWithTimeInterval:(NSTimeInterval) timeInterval {
+    self.timeInterval = timeInterval;
+    self.isRunning = YES;
     
+    [self prepare];   
 }
 
 - (void)stop {
-    
+    self.isRunning = NO;
+}
+
+#pragma mark - Async Execute
+
+- (void)asyncExecute {
+    if (_isRunning) {
+        if (_timeInterval == 0) {
+            _isRunning = NO; // stop next if _timeInterval is 0
+        }
+        
+        NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+        NSTimeInterval interval = currentTime - self.lastExecuteTime;
+        NSTimeInterval sleepTime = 0.0;
+        if (interval < _timeInterval) {
+            sleepTime =  MIN(_timeInterval - interval, _timeInterval);
+        }
+        
+        if (_type == ScriptRunnerType_Script) {
+            dispatch_async(_excuteQueue, ^{
+                [NSThread sleepForTimeInterval:sleepTime];
+                NSLog(@"$$Running---");
+                [self runScript];
+                self.lastExecuteTime = [[NSDate date] timeIntervalSince1970];
+                NSLog(@"$$Finish----");
+                [self asyncExecute];
+            });
+        }
+        else {
+            dispatch_async(_excuteQueue, ^{
+                [NSThread sleepForTimeInterval:sleepTime];
+                NSLog(@"$$Running---");
+                [self runCommand];
+                self.lastExecuteTime = [[NSDate date] timeIntervalSince1970];
+                NSLog(@"$$Finish----");
+                [self asyncExecute];
+            });
+        }
+    }
 }
 
 #pragma mark - Script
-
+// Run on spread thread
 - (void)runScript {
     // File path
     NSFileManager *manager = [NSFileManager defaultManager];
@@ -127,31 +184,60 @@
     NSString *execResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"Execresult: \n[%@]", execResult);
     
-    if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithResult:)]) {
-        [_delegate scriptRunner:self didFinishExecutionWithResult:execResult];
-    }
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithResult:)]) {
+            [_delegate scriptRunner:self didFinishExecutionWithResult:execResult];
+        }
+    });
 }
 
 - (void)downloadScript {
-    NSURLRequest *request = [NSURLRequest requestWithURL:_scriptURL];
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        self.scriptContent = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", _scriptContent);
-        if ([_delegate respondsToSelector:@selector(scriptRunner:didGetScriptContent:)]) {
-            [_delegate scriptRunner:self didGetScriptContent:_scriptContent];
-        }
-        
-        [self runScript];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        INSPALog(@"%@", [error localizedDescription]);
-        [_delegate scriptRunner:self didFailDownloadingScriptWithError:error];
-        
-    }];
-    [operation start];
+    if (_refreshScript || _scriptContent.length == 0) {
+        NSURLRequest *request = [NSURLRequest requestWithURL:_scriptURL];
+        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+            self.scriptContent = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+            NSLog(@"%@", _scriptContent);
+            if ([_delegate respondsToSelector:@selector(scriptRunner:didGetScriptContent:)]) {
+                [_delegate scriptRunner:self didGetScriptContent:_scriptContent];
+            }
+            
+            [self asyncExecute];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            INSPALog(@"%@", [error localizedDescription]);
+            [_delegate scriptRunner:self didFailDownloadingScriptWithError:error];
+            
+        }];
+        [operation start];
+    } else {
+        [self asyncExecute];
+    }
 }
 
-
+#pragma mark - Command
+// Run on spread thread
+- (void)runCommand {
+    NSTask *task = [[NSTask alloc] init];
+    [task setLaunchPath:@"/bin/bash"];
+    
+    NSArray *args = [NSArray arrayWithObjects:@"-l", @"-c", _command, nil];
+    [task setArguments:args];
+    
+    NSPipe *pipe = [NSPipe pipe];
+    [task setStandardOutput:pipe];
+    
+    NSFileHandle *file = [pipe fileHandleForReading];
+    [task launch];
+    NSData *data = [file readDataToEndOfFile];
+    NSString *execResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Execresult: \n[%@]", execResult);
+    
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithResult:)]) {
+            [_delegate scriptRunner:self didFinishExecutionWithResult:execResult];
+        }
+    });
+}
 
 @end
