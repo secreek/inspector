@@ -16,7 +16,7 @@
 
 @property (strong, nonatomic) NSURL *logURL;
 
-- (void)logContentWithPath:(NSString *)path;
+- (void)startGettinglogContentWithPath:(NSString *)path;
 
 @end
 

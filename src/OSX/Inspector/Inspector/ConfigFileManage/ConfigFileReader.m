@@ -42,9 +42,9 @@
     _inspFolderPath = inspFolderPath;
     
     NSError *error;
-    NSArray *inspContents = [_fileManager contentsOfDirectoryAtPath:inspFolderPath error:&error];
     
-    NSLog(@"%@", [inspContents description]);
+    // NSArray *inspContents = [_fileManager contentsOfDirectoryAtPath:inspFolderPath error:&error];
+    // NSLog(@"%@", [inspContents description]);
     
     if (error) {
         INSPALog(@"%@", [error description]);

@@ -10,11 +10,14 @@
 #import "GSImageScrollingTextView.h"
 #import "OBMenuBarWindow.h"
 #import "ConfigFileReader.h"
-#import "ScriptRunner.h"
 
 @interface AppDelegate ()
 
+@property (assign, nonatomic) IBOutlet NSTextView *logTextView;
+
+@property (strong, nonatomic) ConfigFileReader *confFileReader;
 @property (strong, nonatomic) ScriptRunner *runner;
+@property (strong, nonatomic) LogGetter *logGetter;
 
 @end
 
@@ -42,7 +45,66 @@
     
     [[self statueItemView] setMenu:statusMenu];
     
-    [self runTest];
+    
+    self.logGetter = [[LogGetter alloc] init];
+    [_logGetter setDelegate:self];
+    
+    [self checkArguments];
+    
+//    [self runTest];
+}
+
+#pragma mark - Passing in arguments
+
+- (void)checkArguments {
+    NSString *configFolderPath = [self configFolderPathFromArguments];
+    
+    if (configFolderPath) {
+        self.confFileReader = [[ConfigFileReader alloc] initWithInspFolderPath:configFolderPath];
+        self.runner = [[ScriptRunner alloc] initWithScriptPath:_confFileReader.scriptPath refresh:_confFileReader.refreshScript];
+        [_runner setDelegate:self];
+        [_runner runWithTimeInterval:_confFileReader.delay];
+        
+        [[[self statueItemView] imageView] setImage:_confFileReader.normalIcon];
+    }
+}
+
+- (NSString *)configFolderPathFromArguments {
+    NSArray *args = [[NSProcessInfo processInfo] arguments];
+    NSDictionary *env = [[NSProcessInfo processInfo] environment];
+    
+    NSString *file = [args lastObject];
+    NSString *pwd = [env objectForKey:@"PWD"];
+    
+    NSLog(@"file:[%@]", file);
+    NSLog(@"pwd:[%@]", pwd);
+    
+    // TODO: test only remove later
+    file = @"/Users/ultragtx/Desktop/test.insp";
+    
+    // Check if is *.insp
+    if (file.length > 5) {
+        NSRange tailRange = NSMakeRange([file length] - 5, 5);
+        NSLog(@"%@", NSStringFromRange(tailRange));
+        NSRange resultRange = [file rangeOfString:@".insp" options:NSCaseInsensitiveSearch range:tailRange];
+        if (resultRange.location != NSNotFound) {
+            NSLog(@"avaliable insp folder");
+            
+            NSString *fullPath;
+            if ([file characterAtIndex:0] == '/') {
+                // Full path
+                fullPath = file;
+            }
+            else {
+                // Relatvie path
+                fullPath = [NSString stringWithFormat:@"%@/%@", pwd, file];
+            }
+            
+            return fullPath;
+        }
+    }
+    
+    return nil;
 }
 
 #pragma mark - helper
@@ -63,6 +125,27 @@
 
 - (void)menuQuit {
     [[self statueItemView] setText:@"Some text"];
+}
+
+#pragma mark - ScriptRunner delegate
+
+- (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithResult:(NSString *)result {
+    [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
+}
+
+- (void)scriptRunner:(ScriptRunner *)runner didFailDownloadingScriptWithError:(NSError *)error {
+    
+}
+
+#pragma mark - LogGetter delegate
+
+- (void)logGetter:(LogGetter *)logGetter didGetLogContent:(NSString *)content {
+    [_logTextView setString:content];
+    [_logTextView scrollToEndOfDocument:self];
+}
+
+- (void)logGetter:(LogGetter *)logGetter didFailWithError:(NSError *)error {
+    
 }
 
 #pragma mark - For Tests

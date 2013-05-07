@@ -15,6 +15,11 @@ typedef enum {
 
 @protocol ScriptRunnerDelegate;
 
+/** ScriptRunner 
+ *  Once a SciptRunner is initialized, you should NOT set scriptURL/command again.
+ *  In other words, ONE SciptRunner for ONE script/command, DO NOT reuse.
+ */
+
 @interface ScriptRunner : NSObject
 
 @property (weak, nonatomic) id<ScriptRunnerDelegate> delegate;

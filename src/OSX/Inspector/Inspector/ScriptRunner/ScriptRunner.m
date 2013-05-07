@@ -22,6 +22,9 @@
 
 @property (assign, nonatomic) BOOL isRunning;
 @property (assign, atomic) NSTimeInterval lastExecuteTime;
+@property (strong, nonatomic) NSURL *cachedScriptFileURL;
+
+@property (weak, nonatomic) AFHTTPRequestOperation *lastOperation;
 
 @end
 
@@ -133,47 +136,49 @@
 #pragma mark - Script
 // Run on spread thread
 - (void)runScript {
-    // File path
-    NSFileManager *manager = [NSFileManager defaultManager];
-    NSError *error;
-    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
-    NSURL *cacheDirURL = [manager URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
-    NSURL *appCacheDirURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/Script/", appID] relativeToURL:cacheDirURL];
-    
-    if (error) {
-        INSPALog(@"%@", [error description]);
-    }
-
-    NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
-    int randNum = rand();
-    NSURL *scriptLocalURL = [NSURL URLWithString:[NSString stringWithFormat:@"%.0lf_%d_%@", currentTime, randNum, _scriptFileName] relativeToURL:appCacheDirURL];
-    
-    NSLog(@"%@", [scriptLocalURL absoluteString]);
-    
-    // Save file content
-    BOOL success = NO;
-    if ([manager createDirectoryAtURL:appCacheDirURL withIntermediateDirectories:YES attributes:nil error:&error]) {
-        success = [_scriptContent writeToURL:scriptLocalURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
+    if (_refreshScript || _cachedScriptFileURL == nil) {
+        // File path
+        NSFileManager *manager = [NSFileManager defaultManager];
+        NSError *error;
+        NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+        NSURL *cacheDirURL = [manager URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+        NSURL *appCacheDirURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/Script/", appID] relativeToURL:cacheDirURL];
+        
         if (error) {
             INSPALog(@"%@", [error description]);
         }
-    }
-    
-    // Set excutable
-    if (success) {
-        NSNumber *permissions = [NSNumber numberWithUnsignedLong: 493];
-        NSDictionary *attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
-        // This actually sets the permissions
-        success = [manager setAttributes:attributes ofItemAtPath:[scriptLocalURL path]  error:&error];
-        if (error) {
-            INSPALog(@"%@", [error description]);
+        
+        NSTimeInterval currentTime = [[NSDate date] timeIntervalSince1970];
+        int randNum = rand();
+        self.cachedScriptFileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%.0lf_%d_%@", currentTime, randNum, _scriptFileName] relativeToURL:appCacheDirURL];
+        
+        NSLog(@"%@", [_cachedScriptFileURL absoluteString]);
+        
+        // Save file content
+        BOOL success = NO;
+        if ([manager createDirectoryAtURL:appCacheDirURL withIntermediateDirectories:YES attributes:nil error:&error]) {
+            success = [_scriptContent writeToURL:_cachedScriptFileURL atomically:YES encoding:NSUTF8StringEncoding error:&error];
+            if (error) {
+                INSPALog(@"%@", [error description]);
+            }
+        }
+        
+        // Set excutable
+        if (success) {
+            NSNumber *permissions = [NSNumber numberWithUnsignedLong: 493];
+            NSDictionary *attributes = [NSDictionary dictionaryWithObject:permissions forKey:NSFilePosixPermissions];
+            // This actually sets the permissions
+            success = [manager setAttributes:attributes ofItemAtPath:[_cachedScriptFileURL path]  error:&error];
+            if (error) {
+                INSPALog(@"%@", [error description]);
+            }
         }
     }
     
     // Run
     
     NSTask *task = [[NSTask alloc] init];
-    [task setLaunchPath:[scriptLocalURL path]];
+    [task setLaunchPath:[_cachedScriptFileURL path]];
     
     NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
@@ -194,7 +199,15 @@
 - (void)downloadScript {
     if (_refreshScript || _scriptContent.length == 0) {
         NSURLRequest *request = [NSURLRequest requestWithURL:_scriptURL];
+        
+        if (self.lastOperation) {
+            // cancle last to prevent old request arrive later than new request
+            NSLog(@"cancle last");
+            [_lastOperation cancel];
+        }
+        
         AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+        self.lastOperation = operation;
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.scriptContent = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
             NSLog(@"%@", _scriptContent);
