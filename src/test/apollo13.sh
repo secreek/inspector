@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 #!/bin/sh
-
-=======
-#! /bin/bash
->>>>>>> Main logic and several fix
 LOG=/tmp/inspector-test.log
 while true
 do
