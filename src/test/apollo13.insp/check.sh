@@ -1,1 +1,1 @@
-tail -1 /tmp/inspector-test.log | grep rror
+tail -1 /tmp/inspector-test.log | grep -v rror
