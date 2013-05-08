@@ -1,3 +1,5 @@
+#!/bin/sh
+
 LOG=/tmp/inspector-test.log
 while true
 do
