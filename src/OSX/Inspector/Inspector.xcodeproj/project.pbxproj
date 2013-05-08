@@ -10,6 +10,9 @@
 		838AD1D6564D40C184C756B7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 71EFCA0DFCB0469B8D3179C3 /* libPods.a */; };
 		C132EDC717373D6C0082DABD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C132EDC617373D6C0082DABD /* SystemConfiguration.framework */; };
 		C132EDCA173742000082DABD /* LogGetter.m in Sources */ = {isa = PBXBuildFile; fileRef = C132EDC9173742000082DABD /* LogGetter.m */; };
+		C132EDD3173A44660082DABD /* PreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = C132EDD1173A44660082DABD /* PreferencesWindowController.m */; };
+		C132EDD4173A44660082DABD /* PreferencesWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C132EDD2173A44660082DABD /* PreferencesWindowController.xib */; };
+		C132EDD6173A7EBD0082DABD /* InstantMessage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C132EDD5173A7EBC0082DABD /* InstantMessage.framework */; };
 		C140317C1733F2F200FF4A85 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C140317B1733F2F200FF4A85 /* Cocoa.framework */; };
 		C14031861733F2F200FF4A85 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C14031841733F2F200FF4A85 /* InfoPlist.strings */; };
 		C14031881733F2F200FF4A85 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031871733F2F200FF4A85 /* main.m */; };
@@ -34,6 +37,10 @@
 		C132EDC617373D6C0082DABD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		C132EDC8173742000082DABD /* LogGetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogGetter.h; sourceTree = "<group>"; };
 		C132EDC9173742000082DABD /* LogGetter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogGetter.m; sourceTree = "<group>"; };
+		C132EDD0173A44660082DABD /* PreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreferencesWindowController.h; sourceTree = "<group>"; };
+		C132EDD1173A44660082DABD /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
+		C132EDD2173A44660082DABD /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
+		C132EDD5173A7EBC0082DABD /* InstantMessage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstantMessage.framework; path = System/Library/Frameworks/InstantMessage.framework; sourceTree = SDKROOT; };
 		C14031781733F2F200FF4A85 /* Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C140317B1733F2F200FF4A85 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C140317E1733F2F200FF4A85 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -72,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C132EDD6173A7EBD0082DABD /* InstantMessage.framework in Frameworks */,
 				C132EDC717373D6C0082DABD /* SystemConfiguration.framework in Frameworks */,
 				C14031A91734CBF800FF4A85 /* QuartzCore.framework in Frameworks */,
 				C140317C1733F2F200FF4A85 /* Cocoa.framework in Frameworks */,
@@ -82,6 +90,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C132EDCF173A44660082DABD /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C132EDD0173A44660082DABD /* PreferencesWindowController.h */,
+				C132EDD1173A44660082DABD /* PreferencesWindowController.m */,
+				C132EDD2173A44660082DABD /* PreferencesWindowController.xib */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
 		C140316F1733F2F200FF4A85 = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +121,7 @@
 		C140317A1733F2F200FF4A85 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C132EDD5173A7EBC0082DABD /* InstantMessage.framework */,
 				C132EDC617373D6C0082DABD /* SystemConfiguration.framework */,
 				C14031A81734CBF800FF4A85 /* QuartzCore.framework */,
 				C140317B1733F2F200FF4A85 /* Cocoa.framework */,
@@ -125,6 +144,7 @@
 		C14031811733F2F200FF4A85 /* Inspector */ = {
 			isa = PBXGroup;
 			children = (
+				C132EDCF173A44660082DABD /* Preferences */,
 				C14031C31736945B00FF4A85 /* ScriptRunner */,
 				C14031BA1736837200FF4A85 /* ConfigFileManage */,
 				C14031981733F4A500FF4A85 /* OBMenuBarWindow */,
@@ -261,6 +281,7 @@
 				C14031921733F2F200FF4A85 /* MainMenu.xib in Resources */,
 				C140319E1733F5BD00FF4A85 /* MenuBarIcon.png in Resources */,
 				C14031A01733F5E100FF4A85 /* MenuBarIcon2.png in Resources */,
+				C132EDD4173A44660082DABD /* PreferencesWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +319,7 @@
 				C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */,
 				C14031C61736947700FF4A85 /* ScriptRunner.m in Sources */,
 				C132EDCA173742000082DABD /* LogGetter.m in Sources */,
+				C132EDD3173A44660082DABD /* PreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

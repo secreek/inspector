@@ -10,8 +10,11 @@
 #import "GSImageScrollingTextView.h"
 #import "OBMenuBarWindow.h"
 #import "ConfigFileReader.h"
+#import "PreferencesWindowController.h"
 
 @interface AppDelegate ()
+
+@property (strong, nonatomic) PreferencesWindowController *preferencesWC;
 
 @property (assign, nonatomic) IBOutlet NSTextView *logTextView;
 
@@ -38,6 +41,7 @@
 }
 
 - (void)setupVisualRelated {
+    // setup status item
     self.window.hasMenuBarIcon = YES;
     self.window.attachedToMenuBar = YES;
     self.window.obDelegate = self;
@@ -46,6 +50,7 @@
     
     [[self statueItemView] setHighlighted:YES];
     
+    // setup menu
     NSMenu *statusMenu = [[NSMenu alloc] initWithTitle:@"StatusMenu"];
     NSMenuItem *settingsMenuItem = [[NSMenuItem alloc] initWithTitle:@"Settings..." action:@selector(menuSettings) keyEquivalent:@""];
     
@@ -58,6 +63,9 @@
     [statusMenu addItemWithTitle:@"Quit" action:@selector(menuQuit) keyEquivalent:@""];
     
     [[self statueItemView] setMenu:statusMenu];
+    
+    // setup preferences window controller
+    self.preferencesWC = [[PreferencesWindowController alloc] initWithWindowNibName:@"PreferencesWindowController"];
 
 }
 
@@ -88,7 +96,7 @@
     
     // TODO: test only remove later
 //    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
-    file = @"/Users/ultragtx/Desktop/test.insp";
+//    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
     if (file.length > 5) {
@@ -124,7 +132,7 @@
 #pragma mark - Menu
 
 - (void)menuSettings {
-    [[self statueItemView] setText:@"Lorem lorem lorem lorem lorem."];
+    [_preferencesWC showWindow:self];
 }
 
 - (void)menuAbout {
@@ -181,7 +189,9 @@
 #pragma mark - OBMenuBarWindow delegate
 
 - (void)obWindowDidAppear:(OBMenuBarWindow *)window {
-    [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
+    if (_confFileReader) {
+        [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
+    }
 }
 
 #pragma mark - For Tests
