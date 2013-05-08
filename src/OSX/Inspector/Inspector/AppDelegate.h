@@ -9,14 +9,14 @@
 #import <Cocoa/Cocoa.h>
 #import "ScriptRunner.h"
 #import "LogGetter.h"
-
-@class OBMenuBarWindow;
+#import "OBMenuBarWindow.h"
 
 @interface AppDelegate : NSObject
 <
 NSApplicationDelegate,
 ScriptRunnerDelegate,
-LogGetterDelegate
+LogGetterDelegate,
+OBMenuBarWindowDelegate
 >
 
 @property (assign) IBOutlet OBMenuBarWindow *window;

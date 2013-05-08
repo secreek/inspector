@@ -19,14 +19,28 @@
 @property (strong, nonatomic) ScriptRunner *runner;
 @property (strong, nonatomic) LogGetter *logGetter;
 
+@property (assign, nonatomic) int lastStatusCode;
+
 @end
 
 @implementation AppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    [self setupVisualRelated];
+    
+    self.logGetter = [[LogGetter alloc] init];
+    [_logGetter setDelegate:self];
+    
+    [self checkArguments];
+    
+//    [self runTest];
+}
+
+- (void)setupVisualRelated {
     self.window.hasMenuBarIcon = YES;
     self.window.attachedToMenuBar = YES;
+    self.window.obDelegate = self;
     
     [[[self statueItemView] imageView] setImage:[NSImage imageNamed:@"MenuBarIcon"]];
     
@@ -44,14 +58,7 @@
     [statusMenu addItemWithTitle:@"Quit" action:@selector(menuQuit) keyEquivalent:@""];
     
     [[self statueItemView] setMenu:statusMenu];
-    
-    
-    self.logGetter = [[LogGetter alloc] init];
-    [_logGetter setDelegate:self];
-    
-    [self checkArguments];
-    
-//    [self runTest];
+
 }
 
 #pragma mark - Passing in arguments
@@ -80,6 +87,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
+//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
     file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
@@ -124,28 +132,56 @@
 }
 
 - (void)menuQuit {
-    [[self statueItemView] setText:@"Some text"];
+//    [[self statueItemView] setText:@"Some text"];
+    [[NSApplication sharedApplication] terminate:self];
 }
 
 #pragma mark - ScriptRunner delegate
 
-- (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithResult:(NSString *)result {
-    [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
+- (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithStatusCode:(int)statusCode result:(NSString *)result {
+    self.lastStatusCode = statusCode;
+    if (_lastStatusCode != 0) {
+        // Error
+        NSLog(@"Get Error");
+        [[[self statueItemView] imageView] setImage:_confFileReader.errorIcon];
+        [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
+        
+    }
+    else {
+        // OK
+        [[[self statueItemView] imageView] setImage:_confFileReader.normalIcon];
+    }
+
 }
 
 - (void)scriptRunner:(ScriptRunner *)runner didFailDownloadingScriptWithError:(NSError *)error {
-    
+    NSAlert *alert = [NSAlert alertWithError:error];
+    [alert runModal];
 }
 
 #pragma mark - LogGetter delegate
 
 - (void)logGetter:(LogGetter *)logGetter didGetLogContent:(NSString *)content {
-    [_logTextView setString:content];
-    [_logTextView scrollToEndOfDocument:self];
+    if ([_window isVisible]) {
+        [_logTextView setString:content];
+        [_logTextView scrollToEndOfDocument:self];
+    }
+    
+    if (_lastStatusCode != 0) {
+        // show error
+        [[self statueItemView] setText:[[content componentsSeparatedByString:@"\n"] lastObject]];
+    }
 }
 
 - (void)logGetter:(LogGetter *)logGetter didFailWithError:(NSError *)error {
-    
+    NSAlert *alert = [NSAlert alertWithError:error];
+    [alert runModal];
+}
+
+#pragma mark - OBMenuBarWindow delegate
+
+- (void)obWindowDidAppear:(OBMenuBarWindow *)window {
+    [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
 }
 
 #pragma mark - For Tests

@@ -21,7 +21,7 @@
 @property (assign, nonatomic) NSTimeInterval timeInterval;
 
 @property (assign, nonatomic) BOOL isRunning;
-@property (assign, atomic) NSTimeInterval lastExecuteTime;
+@property (assign, nonatomic) NSTimeInterval lastExecuteTime;
 @property (strong, nonatomic) NSURL *cachedScriptFileURL;
 
 @property (weak, nonatomic) AFHTTPRequestOperation *lastOperation;
@@ -179,19 +179,25 @@
     
     NSTask *task = [[NSTask alloc] init];
     [task setLaunchPath:[_cachedScriptFileURL path]];
+//    NSTask *task = [[NSTask alloc] init];
+//    [task setLaunchPath:@"/bin/bash"];
+    
+    NSArray *args = [NSArray arrayWithObjects:@"-l", @"-c", [NSString stringWithFormat:@"sh %@", [_cachedScriptFileURL path]], nil];
+    [task setArguments:args];
     
     NSPipe *pipe = [NSPipe pipe];
     [task setStandardOutput:pipe];
     
     NSFileHandle *file = [pipe fileHandleForReading];
     [task launch];
+    [task waitUntilExit];
     NSData *data = [file readDataToEndOfFile];
     NSString *execResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"Execresult: \n[%@]", execResult);
     
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithResult:)]) {
-            [_delegate scriptRunner:self didFinishExecutionWithResult:execResult];
+        if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithStatusCode:result:)]) {
+            [_delegate scriptRunner:self didFinishExecutionWithStatusCode:[task terminationStatus] result:execResult];
         }
     });
 }
@@ -242,13 +248,14 @@
     
     NSFileHandle *file = [pipe fileHandleForReading];
     [task launch];
+    [task waitUntilExit];
     NSData *data = [file readDataToEndOfFile];
     NSString *execResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSLog(@"Execresult: \n[%@]", execResult);
     
     dispatch_sync(dispatch_get_main_queue(), ^{
-        if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithResult:)]) {
-            [_delegate scriptRunner:self didFinishExecutionWithResult:execResult];
+        if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithStatusCode:result:)]) {
+            [_delegate scriptRunner:self didFinishExecutionWithStatusCode:[task terminationStatus] result:execResult];
         }
     });
 }

@@ -82,6 +82,9 @@
     // Script && Command
     
     self.scriptPath = [_configDict objectForKey:@"script"];
+    if ([_scriptPath characterAtIndex:0] != '/') {
+        self.scriptPath = [NSString stringWithFormat:@"%@/%@", inspFolderPath, _scriptPath];
+    }
     
     if (!_scriptPath || [_scriptPath length] == 0) {
         self.command = [_configDict objectForKey:@"command"];

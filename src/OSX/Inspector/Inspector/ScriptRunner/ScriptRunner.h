@@ -50,6 +50,6 @@ typedef enum {
 @optional
 
 - (void)scriptRunner:(ScriptRunner *)runner didGetScriptContent:(NSString *)content;
-- (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithResult:(NSString *)result;
+- (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithStatusCode:(int)statusCode result:(NSString *)result;
 
 @end

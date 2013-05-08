@@ -37,7 +37,7 @@
     self.lastOperation = operation;
     [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSString *content = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
-        NSLog(@"%@", content);
+//        NSLog(@"%@", content);
         
         [_delegate logGetter:self didGetLogContent:content];
         
