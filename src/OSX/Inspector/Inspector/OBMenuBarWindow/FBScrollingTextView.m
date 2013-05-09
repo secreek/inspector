@@ -6,11 +6,14 @@
 //
 
 #import "FBScrollingTextView.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kFBScrollingTextViewSpacing 0.5
 
 #define kFBScrollingTextViewDefaultScrollingSpeed 2
 #define kFBScrollingTextViewStartScrollingDelay 0.3
+
+#define kCursorYOffset 2.0f
 
 @implementation FBScrollingTextView
 @synthesize scrollingSpeed;
@@ -44,10 +47,14 @@
     
     self = [super initWithFrame:frame];
     if (self) {
+//        [self setWantsLayer:YES];
+//        [self.layer setBorderWidth:1.0f];
+//        [self.layer setBorderColor:CGColorCreateGenericRGB(0.0f, 1.0f, 0.0f, 1.0f)];
+        
         // Initialization code.			
 		scrollingSpeed = kFBScrollingTextViewDefaultScrollingSpeed;
 		refreshRate = 0.05;
-		cursor = NSMakePoint(0, 0);
+		cursor = NSMakePoint(0, kCursorYOffset);
 		self.font = [NSFont systemFontOfSize:[NSFont systemFontSize]];
         self.maxWidth = frame.size.width;
     }
@@ -65,7 +72,7 @@
 		tickTockStartScrolling = nil;
 	}
 	
-	cursor = NSMakePoint(0, 0);
+	cursor = NSMakePoint(0, kCursorYOffset);
 	string = _string;
 	CGRect thisFrame = [super frame];
     CGFloat stringWidth = [self stringWidth];
