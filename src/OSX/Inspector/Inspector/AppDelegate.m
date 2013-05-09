@@ -23,6 +23,7 @@
 @property (strong, nonatomic) LogGetter *logGetter;
 
 @property (assign, nonatomic) int lastStatusCode;
+@property (strong, nonatomic) NSString *lastErrorLine;
 
 @end
 
@@ -47,8 +48,6 @@
     self.window.obDelegate = self;
     
     [[[self statueItemView] imageView] setImage:[NSImage imageNamed:@"MenuBarIcon"]];
-    
-    [[self statueItemView] setHighlighted:YES];
     
     // setup menu
     NSMenu *statusMenu = [[NSMenu alloc] initWithTitle:@"StatusMenu"];
@@ -148,7 +147,20 @@
 
 - (void)scriptRunner:(ScriptRunner *)runner didFinishExecutionWithStatusCode:(int)statusCode result:(NSString *)result {
     self.lastStatusCode = statusCode;
-    if (_lastStatusCode != 0) {
+    if (_lastStatusCode == 0 && [_window isVisible]) {
+        [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
+    }
+}
+
+- (void)scriptRunner:(ScriptRunner *)runner didFailDownloadingScriptWithError:(NSError *)error {
+    NSAlert *alert = [NSAlert alertWithError:error];
+    [alert runModal];
+}
+
+#pragma mark - Setter
+
+- (void)setLastStatusCode:(int)statusCode {
+    if (statusCode != 0) {
         // Error
         NSLog(@"Get Error");
         [[[self statueItemView] imageView] setImage:_confFileReader.errorIcon];
@@ -158,13 +170,20 @@
     else {
         // OK
         [[[self statueItemView] imageView] setImage:_confFileReader.normalIcon];
+        if (_lastStatusCode != statusCode) {
+            // previous error, set to normal
+            [[self statueItemView] setText:nil];
+        }
     }
-
+    _lastStatusCode = statusCode;
 }
 
-- (void)scriptRunner:(ScriptRunner *)runner didFailDownloadingScriptWithError:(NSError *)error {
-    NSAlert *alert = [NSAlert alertWithError:error];
-    [alert runModal];
+- (void)setLastErrorLine:(NSString *)errorLine {
+    if (![_lastErrorLine isEqualToString:errorLine]) {
+        _lastErrorLine = errorLine;
+        [[self statueItemView] setText:_lastErrorLine];
+    }
+    
 }
 
 #pragma mark - LogGetter delegate
@@ -177,7 +196,15 @@
     
     if (_lastStatusCode != 0) {
         // show error
-        [[self statueItemView] setText:[[content componentsSeparatedByString:@"\n"] lastObject]];
+        NSArray *components = [content componentsSeparatedByString:@"\n"];
+        NSEnumerator *enumerator = [components reverseObjectEnumerator];
+        NSString *lastLine;
+        while (lastLine = [enumerator nextObject]) {
+            if (lastLine.length > 0) {
+                break;
+            }
+        }
+        self.lastErrorLine = lastLine;
     }
 }
 

@@ -1296,7 +1296,7 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{335, 390}, {480, 360}}</string>
+				<string key="NSWindowRect">{{486, 410}, {480, 360}}</string>
 				<int key="NSWTFlags">1954021376</int>
 				<string key="NSWindowTitle">Inspector</string>
 				<string key="NSWindowClass">OBMenuBarWindow</string>
@@ -1317,10 +1317,10 @@
 										<object class="NSTextView" id="940425011">
 											<reference key="NSNextResponder" ref="885219005"/>
 											<int key="NSvFlags">2322</int>
-											<string key="NSFrameSize">{465, 360}</string>
+											<string key="NSFrameSize">{495, 360}</string>
 											<reference key="NSSuperview" ref="885219005"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="689869309"/>
+											<reference key="NSNextKeyView" ref="1029153643"/>
 											<string key="NSReuseIdentifierKey">_NS:13</string>
 											<object class="NSTextContainer" key="NSTextContainer" id="538192290">
 												<object class="NSLayoutManager" key="NSLayoutManager">
@@ -1337,7 +1337,7 @@
 													<nil key="NSDelegate"/>
 												</object>
 												<reference key="NSTextView" ref="940425011"/>
-												<double key="NSWidth">465</double>
+												<double key="NSWidth">495</double>
 												<int key="NSTCFlags">1</int>
 											</object>
 											<object class="NSTextViewSharedData" key="NSSharedData">
@@ -1385,11 +1385,12 @@
 												<int key="NSPreferredTextFinderStyle">1</int>
 											</object>
 											<int key="NSTVFlags">6</int>
-											<string key="NSMaxSize">{465, 10000000}</string>
+											<string key="NSMaxSize">{495, 10000000}</string>
+											<string key="NSMinize">{480, 360}</string>
 											<nil key="NSDelegate"/>
 										</object>
 									</array>
-									<string key="NSFrame">{{1, 1}, {465, 360}}</string>
+									<string key="NSFrame">{{1, 1}, {480, 360}}</string>
 									<reference key="NSSuperview" ref="458171679"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="940425011"/>
@@ -1420,7 +1421,7 @@
 								<object class="NSScroller" id="1029153643">
 									<reference key="NSNextResponder" ref="458171679"/>
 									<int key="NSvFlags">256</int>
-									<string key="NSFrame">{{466, 1}, {15, 360}}</string>
+									<string key="NSFrame">{{465, 1}, {16, 360}}</string>
 									<reference key="NSSuperview" ref="458171679"/>
 									<reference key="NSWindow"/>
 									<string key="NSReuseIdentifierKey">_NS:83</string>
@@ -1438,6 +1439,7 @@
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="885219005"/>
 									<string key="NSReuseIdentifierKey">_NS:33</string>
+									<bool key="NSEnabled">YES</bool>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 									<int key="NSsFlags">1</int>
 									<reference key="NSTarget" ref="458171679"/>
@@ -1449,9 +1451,9 @@
 							<string key="NSFrame">{{-1, -1}, {482, 362}}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="885219005"/>
+							<reference key="NSNextKeyView" ref="689869309"/>
 							<string key="NSReuseIdentifierKey">_NS:9</string>
-							<int key="NSsFlags">133138</int>
+							<int key="NSsFlags">133266</int>
 							<reference key="NSVScroller" ref="1029153643"/>
 							<reference key="NSHScroller" ref="689869309"/>
 							<reference key="NSContentView" ref="885219005"/>
@@ -1463,6 +1465,7 @@
 					<string key="NSFrameSize">{480, 360}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
+					<reference key="NSNextKeyView" ref="458171679"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
@@ -3339,9 +3342,11 @@
 				<string key="350.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="351.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="354.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<boolean value="NO" key="371.IBNSWindowAutoPositionCentersHorizontal"/>
+				<boolean value="NO" key="371.IBNSWindowAutoPositionCentersVertical"/>
 				<string key="371.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="371.IBWindowTemplateEditedContentRect">{{380, 496}, {480, 360}}</string>
-				<integer value="1" key="371.NSWindowTemplate.visibleAtLaunch"/>
+				<boolean value="NO" key="371.NSWindowTemplate.visibleAtLaunch"/>
 				<array class="NSMutableArray" key="372.IBNSViewMetadataConstraints">
 					<reference ref="700705506"/>
 					<reference ref="765086075"/>

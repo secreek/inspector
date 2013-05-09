@@ -41,6 +41,7 @@
 		C132EDD1173A44660082DABD /* PreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreferencesWindowController.m; sourceTree = "<group>"; };
 		C132EDD2173A44660082DABD /* PreferencesWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindowController.xib; sourceTree = "<group>"; };
 		C132EDD5173A7EBC0082DABD /* InstantMessage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = InstantMessage.framework; path = System/Library/Frameworks/InstantMessage.framework; sourceTree = SDKROOT; };
+		C132EDD7173B290F0082DABD /* TODO.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO.md; sourceTree = "<group>"; };
 		C14031781733F2F200FF4A85 /* Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inspector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C140317B1733F2F200FF4A85 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		C140317E1733F2F200FF4A85 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -103,6 +104,7 @@
 		C140316F1733F2F200FF4A85 = {
 			isa = PBXGroup;
 			children = (
+				C132EDD7173B290F0082DABD /* TODO.md */,
 				C14031811733F2F200FF4A85 /* Inspector */,
 				C140317A1733F2F200FF4A85 /* Frameworks */,
 				C14031791733F2F200FF4A85 /* Products */,
