@@ -87,6 +87,21 @@
     return _scrollingTextView.maxWidth;
 }
 
+#pragma mark - Public
+
+- (void)setText:(NSString *)text waitForPreviousFinishScrolling:(BOOL)shouldWait {
+    if (shouldWait) {
+        [_scrollingTextView setString:text waitForPreviousFinishScrolling:YES];
+        [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
+            [[self animator] setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];
+        } completionHandler:nil];
+
+    }
+    else {
+        [self setText:text];
+    }
+}
+
 #pragma mark - NSMenu delegate
 
 - (void)menuWillOpen:(NSMenu *)menu {

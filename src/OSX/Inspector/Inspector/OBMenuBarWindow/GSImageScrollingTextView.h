@@ -28,5 +28,6 @@ NSMenuDelegate
 - (id)initWithMaxTextWidth:(CGFloat)width;
 
 - (void)setText:(NSString *)text;
+- (void)setText:(NSString *)text waitForPreviousFinishScrolling:(BOOL)shouldWait;
 
 @end

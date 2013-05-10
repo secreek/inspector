@@ -19,6 +19,12 @@
 
 @property (strong, nonatomic) NSFont *font;
 
+@property (strong, nonatomic) NSString *nextString;
+
+// Status for scrolling
+
+@property (assign, nonatomic) BOOL prevScrollEnd;
+
 @end
 
 @implementation FBScrollingTextView
@@ -80,9 +86,10 @@
 	
 	cursor = NSMakePoint(0, kCursorYOffset);
 	string = _string;
-	CGRect thisFrame = [super frame];
+    self.nextString = string;
+//	CGRect thisFrame = [super frame];
     CGFloat stringWidth = [self stringWidth];
-	if (stringWidth > thisFrame.size.width) {
+	if (stringWidth > _maxWidth) {
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _maxWidth, self.frame.size.height)];
 		if (!tickTockStartScrolling) {
 			tickTockStartScrolling = [NSTimer scheduledTimerWithTimeInterval:kFBScrollingTextViewStartScrollingDelay target:self selector:@selector(startScrolling) userInfo:nil repeats:NO];
@@ -92,6 +99,18 @@
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, stringWidth, self.frame.size.height)];
     }
 	[self setNeedsDisplay:YES];
+}
+
+- (void)setString:(NSString *)newString waitForPreviousFinishScrolling:(BOOL)shouldWait {
+    if (shouldWait) {
+        self.nextString = newString;
+        if (tickTockScroll == nil) {
+            self.string = _nextString;
+        }
+    }
+    else {
+        self.string = _nextString;
+    }
 }
 
 - (void)setMaxWidth:(CGFloat)maxWidth {
@@ -118,9 +137,11 @@
 	CGFloat rWidth = round(rect.size.width);
 	CGFloat spacing = round(rWidth*kFBScrollingTextViewSpacing);
 	
-	if ((cursor.x*-1) == sWidth) {		
+	if ((cursor.x*-1) == sWidth) {
+        // A full circle of scroll
 		CGFloat diff = spacing - (sWidth+cursor.x);
-		cursor.x = rWidth-diff;		
+		cursor.x = rWidth-diff;
+        string = _nextString;
 	}
     
     NSColor *fontColor = _highlighted ? [NSColor whiteColor] : [NSColor blackColor];
@@ -132,7 +153,7 @@
 	CGFloat diff = spacing - (sWidth+cursor.x);	
 	if (diff >= 0) {
 		NSPoint point = NSMakePoint(rWidth-diff, cursor.y);
-		[string drawAtPoint:point withAttributes:attrs];
+		[_nextString drawAtPoint:point withAttributes:attrs];
 	}
 }
 

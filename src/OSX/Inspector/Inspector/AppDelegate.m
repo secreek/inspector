@@ -12,6 +12,8 @@
 #import "ConfigFileReader.h"
 #import "PreferencesWindowController.h"
 
+#define INSP_V_APPENDERRORTEXT YES
+
 @interface AppDelegate ()
 
 @property (strong, nonatomic) PreferencesWindowController *preferencesWC;
@@ -38,7 +40,7 @@
     
     [self checkArguments];
     
-//    [self runTest];
+    [self runTest];
 }
 
 - (void)setupVisualRelated {
@@ -192,7 +194,7 @@
 - (void)setLastErrorLine:(NSString *)errorLine {
     if (![_lastErrorLine isEqualToString:errorLine]) {
         _lastErrorLine = errorLine;
-        [[self statueItemView] setText:_lastErrorLine];
+        [[self statueItemView] setText:_lastErrorLine waitForPreviousFinishScrolling:YES];
     }
 }
 
@@ -239,7 +241,8 @@
 //    [self testCommandRunner];
     
 //    [self performSelector:@selector(stopRunner) withObject:nil afterDelay:10];
-//    [self performSelector:@selector(changeTextWidth) withObject:nil afterDelay:3];
+//    [self performSelector:@selector(testChangeTextWidth) withObject:nil afterDelay:3];
+//    [self performSelector:@selector(testAppendText) withObject:nil afterDelay:3];
 }
 
 - (void)testConfigFileReader {
@@ -265,8 +268,12 @@
     [_runner stop];
 }
 
-- (void)changeTextWidth {
+- (void)testChangeTextWidth {
     [[self statueItemView] setMaxTextWidth:100];
+}
+
+- (void)testAppendText {
+    [[self statueItemView] setText:@"PPPPPPPPPPPPP OOOOOOOOOO" waitForPreviousFinishScrolling:YES];
 }
 
 @end

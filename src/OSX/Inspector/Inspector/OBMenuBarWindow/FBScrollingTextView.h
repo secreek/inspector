@@ -29,4 +29,6 @@
 - (void)startScrolling;
 - (void)stopScrolling;
 
+- (void)setString:(NSString *)string waitForPreviousFinishScrolling:(BOOL)shouldWait;
+
 @end
