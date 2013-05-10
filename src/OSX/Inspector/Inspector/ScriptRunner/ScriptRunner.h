@@ -30,7 +30,7 @@ typedef enum {
 @property (readonly, nonatomic) BOOL refreshScript;
 @property (readonly, nonatomic) NSString *command;
 
-@property (readonly, nonatomic) NSTimeInterval timeInterval;
+@property (assign, nonatomic) NSTimeInterval timeInterval;
 
 - (id)initWithScriptPath:(NSString *)path refresh:(BOOL)refresh;
 - (id)initWithCommand:(NSString *)command;

@@ -21,5 +21,8 @@
 @property (readonly, nonatomic) NSString *scriptPath;
 @property (readonly, nonatomic) BOOL refreshScript;
 @property (readonly, nonatomic) NSTimeInterval delay;
+@property (readonly, nonatomic) NSTimeInterval normalDelay;
+@property (readonly, nonatomic) NSTimeInterval errorDelay;
+@property (readonly, nonatomic) BOOL changeDelayWhenError;
 
 @end

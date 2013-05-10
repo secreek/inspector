@@ -23,6 +23,9 @@
 @property (strong, nonatomic) NSString *scriptPath;
 @property (assign, nonatomic) BOOL refreshScript;
 @property (assign, nonatomic) NSTimeInterval delay;
+@property (assign, nonatomic) NSTimeInterval normalDelay;
+@property (assign, nonatomic) NSTimeInterval errorDelay;
+@property (assign, nonatomic) BOOL changeDelayWhenError;
 
 @end
 
@@ -102,10 +105,15 @@
         }
     }
     
-    self.delay = [[_configDict objectForKey:@"delay"] floatValue];
-    
+    if ([_configDict objectForKey:@"normal-delay"]) {
+        self.normalDelay = [[_configDict objectForKey:@"normal-delay"] floatValue];
+        self.errorDelay = [[_configDict objectForKey:@"error-delay"] floatValue];
+        self.changeDelayWhenError = YES;
+    }
+    else {
+        self.delay = [[_configDict objectForKey:@"delay"] floatValue];
+        self.changeDelayWhenError = NO;
+    }
 }
-
-
 
 @end

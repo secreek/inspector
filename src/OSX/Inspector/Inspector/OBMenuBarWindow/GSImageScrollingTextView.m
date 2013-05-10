@@ -26,9 +26,6 @@
         [_imageView setImageAlignment:NSImageAlignCenter];
         
         self.scrollingTextView = [[FBScrollingTextView alloc] initWithFrame:CGRectMake(22, 0, width, 22)];
-        [_scrollingTextView setFont:[NSFont systemFontOfSize:13.0f]];
-//        [_scrollingTextView setString:@"Some long long long text"];
-//        [_scrollingTextView setString:@"Some text"];
         [_scrollingTextView setString:@""];
         
         [self setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];

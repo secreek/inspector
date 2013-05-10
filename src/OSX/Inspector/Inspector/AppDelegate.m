@@ -77,7 +77,13 @@
         self.confFileReader = [[ConfigFileReader alloc] initWithInspFolderPath:configFolderPath];
         self.runner = [[ScriptRunner alloc] initWithScriptPath:_confFileReader.scriptPath refresh:_confFileReader.refreshScript];
         [_runner setDelegate:self];
-        [_runner runWithTimeInterval:_confFileReader.delay];
+        if (_confFileReader.changeDelayWhenError) {
+            [_runner runWithTimeInterval:_confFileReader.normalDelay];
+        }
+        else {
+            [_runner runWithTimeInterval:_confFileReader.delay];
+        }
+        
         
         [[[self statueItemView] imageView] setImage:_confFileReader.normalIcon];
     }
@@ -94,7 +100,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
-//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
+    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
 //    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
@@ -165,7 +171,9 @@
         NSLog(@"Get Error");
         [[[self statueItemView] imageView] setImage:_confFileReader.errorIcon];
         [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
-        
+        if (_confFileReader.changeDelayWhenError) {
+            [_runner setTimeInterval:_confFileReader.errorDelay];
+        }
     }
     else {
         // OK
@@ -173,6 +181,9 @@
         if (_lastStatusCode != statusCode) {
             // previous error, set to normal
             [[self statueItemView] setText:nil];
+            if (_confFileReader.changeDelayWhenError) {
+                [_runner setTimeInterval:_confFileReader.normalDelay];
+            }
         }
     }
     _lastStatusCode = statusCode;
@@ -183,7 +194,6 @@
         _lastErrorLine = errorLine;
         [[self statueItemView] setText:_lastErrorLine];
     }
-    
 }
 
 #pragma mark - LogGetter delegate

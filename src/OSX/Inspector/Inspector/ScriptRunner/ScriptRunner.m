@@ -18,7 +18,7 @@
 @property (strong, nonatomic) NSString *command;
 @property (strong, nonatomic) NSString *scriptFileName;
 @property (strong, nonatomic) NSString *scriptContent;
-@property (assign, nonatomic) NSTimeInterval timeInterval;
+//@property (assign, nonatomic) NSTimeInterval timeInterval;
 
 @property (assign, nonatomic) BOOL isRunning;
 @property (assign, nonatomic) NSTimeInterval lastExecuteTime;

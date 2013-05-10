@@ -18,7 +18,7 @@
 	NSTimer *tickTockScroll;
 	NSPoint cursor;
 }
-@property (readwrite, strong, nonatomic) NSFont *font;
+@property (readonly, nonatomic) NSFont *font;
 @property (readwrite) CGFloat scrollingSpeed;
 @property (readwrite, strong, nonatomic) NSString *string;
 

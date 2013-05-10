@@ -15,6 +15,12 @@
 
 #define kCursorYOffset 2.0f
 
+@interface FBScrollingTextView ()
+
+@property (strong, nonatomic) NSFont *font;
+
+@end
+
 @implementation FBScrollingTextView
 @synthesize scrollingSpeed;
 @synthesize string;
