@@ -103,7 +103,22 @@
 
 - (void)setString:(NSString *)newString waitForPreviousFinishScrolling:(BOOL)shouldWait {
     if (shouldWait) {
+        // Discussion:
+        // When string A is current scrolling string, stirng B came and string C comes
+        // Choose 1 to ignore string B, show string C after string A finish scroling
+        // Choose 2 to combine string B and C, show the combined string after string A finish scrolling
+        
+        /************ 1 *************/
         self.nextString = newString;
+        
+        /************ 2 *************/
+        /*if (string == _nextString) {
+            self.nextString = newString;
+        }
+        else {
+            self.nextString = [NSString stringWithFormat:@"%@ %@", _nextString, newString];
+        }*/
+        
         if (tickTockScroll == nil) {
             self.string = _nextString;
         }
