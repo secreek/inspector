@@ -234,11 +234,12 @@
 #pragma mark - For Tests
 
 - (void)runTest {
-    [self testConfigFileReader];
-    [self testScriptRunner];
-    //    [self testCommandRunner];
+//    [self testConfigFileReader];
+//    [self testScriptRunner];
+//    [self testCommandRunner];
     
-    [self performSelector:@selector(stopRunner) withObject:nil afterDelay:10];
+//    [self performSelector:@selector(stopRunner) withObject:nil afterDelay:10];
+//    [self performSelector:@selector(changeTextWidth) withObject:nil afterDelay:3];
 }
 
 - (void)testConfigFileReader {
@@ -262,6 +263,10 @@
 
 - (void)stopRunner {
     [_runner stop];
+}
+
+- (void)changeTextWidth {
+    [[self statueItemView] setMaxTextWidth:100];
 }
 
 @end

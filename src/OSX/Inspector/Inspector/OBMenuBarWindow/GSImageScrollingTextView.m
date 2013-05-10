@@ -62,7 +62,7 @@
     [self.menu setDelegate:self];
 }
 
-#pragma mark setter
+#pragma mark - setter
 
 - (void)setHighlighted:(BOOL)highlighted {
     [_scrollingTextView setHighlighted:highlighted];
@@ -76,7 +76,18 @@
     } completionHandler:nil];
 }
 
-#pragma mark NSMenu delegate
+- (void)setMaxTextWidth:(CGFloat)maxTextWidth {
+    [_scrollingTextView setMaxWidth:maxTextWidth];
+    [self setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];
+}
+
+#pragma mark - geter
+
+- (CGFloat)maxTextWidth {
+    return _scrollingTextView.maxWidth;
+}
+
+#pragma mark - NSMenu delegate
 
 - (void)menuWillOpen:(NSMenu *)menu {
     [self setHighlighted:YES];

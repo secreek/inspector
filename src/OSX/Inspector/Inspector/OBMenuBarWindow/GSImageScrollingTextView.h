@@ -23,6 +23,7 @@ NSMenuDelegate
 
 @property (assign, nonatomic) OBMenuBarWindow *menuBarWindow;
 @property (assign, nonatomic) BOOL highlighted;
+@property (assign, nonatomic) CGFloat maxTextWidth;
 
 - (id)initWithMaxTextWidth:(CGFloat)width;
 

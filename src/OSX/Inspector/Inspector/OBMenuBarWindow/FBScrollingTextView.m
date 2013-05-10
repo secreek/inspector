@@ -86,12 +86,17 @@
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, _maxWidth, self.frame.size.height)];
 		if (!tickTockStartScrolling) {
 			tickTockStartScrolling = [NSTimer scheduledTimerWithTimeInterval:kFBScrollingTextViewStartScrollingDelay target:self selector:@selector(startScrolling) userInfo:nil repeats:NO];
-		}		
+		}
 	}
     else {
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, stringWidth, self.frame.size.height)];
     }
 	[self setNeedsDisplay:YES];
+}
+
+- (void)setMaxWidth:(CGFloat)maxWidth {
+    _maxWidth = maxWidth;
+    [self setString:string];
 }
 
 - (void)setHighlighted:(BOOL)highlighted {
