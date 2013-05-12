@@ -16,6 +16,8 @@
 
 @property (readonly, nonatomic) NSImage *normalIcon;
 @property (readonly, nonatomic) NSImage *errorIcon;
+@property (readonly, nonatomic) NSImage *normalIcon2x;
+@property (readonly, nonatomic) NSImage *errorIcon2x;
 @property (readonly, nonatomic) NSString *logPath;
 @property (readonly, nonatomic) NSString *command;
 @property (readonly, nonatomic) NSString *scriptPath;
@@ -24,5 +26,12 @@
 @property (readonly, nonatomic) NSTimeInterval normalDelay;
 @property (readonly, nonatomic) NSTimeInterval errorDelay;
 @property (readonly, nonatomic) BOOL changeDelayWhenError;
+
+@end
+
+@interface ConfigFileReader (HighResSupport)
+
+- (NSImage *)normalIconForCurrentMainScreenResolution;
+- (NSImage *)errorIconForcurrentMainScreenResolution;
 
 @end

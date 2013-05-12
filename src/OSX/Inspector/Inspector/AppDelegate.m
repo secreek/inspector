@@ -11,6 +11,7 @@
 #import "OBMenuBarWindow.h"
 #import "ConfigFileReader.h"
 #import "PreferencesWindowController.h"
+#import "NSString+ImageName.h"
 
 #define INSP_V_APPENDERRORTEXT YES
 
@@ -34,6 +35,7 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [self setupVisualRelated];
+    [self setupNotifications];
     
     self.logGetter = [[LogGetter alloc] init];
     [_logGetter setDelegate:self];
@@ -70,6 +72,11 @@
 
 }
 
+- (void)setupNotifications {
+    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
+    [notificationCenter addObserver:self selector:@selector(handleScreenParameterChange) name:NSApplicationDidChangeScreenParametersNotification object:nil];
+}
+
 #pragma mark - Passing in arguments
 
 - (void)checkArguments {
@@ -102,7 +109,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
-    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
+//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
 //    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
@@ -171,15 +178,15 @@
     if (statusCode != 0) {
         // Error
         NSLog(@"Get Error");
-        [[[self statueItemView] imageView] setImage:_confFileReader.errorIcon];
+        [[[self statueItemView] imageView] setImage:[_confFileReader errorIconForcurrentMainScreenResolution]];
         [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
         if (_confFileReader.changeDelayWhenError) {
             [_runner setTimeInterval:_confFileReader.errorDelay];
         }
     }
     else {
-        // OK
-        [[[self statueItemView] imageView] setImage:_confFileReader.normalIcon];
+        // Normal
+        [[[self statueItemView] imageView] setImage:[_confFileReader normalIconForCurrentMainScreenResolution]];
         if (_lastStatusCode != statusCode) {
             // previous error, set to normal
             [[self statueItemView] setText:nil];
@@ -196,6 +203,21 @@
         _lastErrorLine = errorLine;
         [[self statueItemView] setText:_lastErrorLine waitForPreviousFinishScrolling:YES];
     }
+}
+
+#pragma mark - Notifications
+
+- (void)handleScreenParameterChange {
+    // Rest image
+    if (_lastStatusCode != 0) {
+        // Error
+        [[[self statueItemView] imageView] setImage:[_confFileReader errorIconForcurrentMainScreenResolution]];
+    }
+    else {
+        // Normal
+        [[[self statueItemView] imageView] setImage:[_confFileReader normalIconForCurrentMainScreenResolution]];
+    }
+    
 }
 
 #pragma mark - LogGetter delegate
@@ -243,6 +265,7 @@
 //    [self performSelector:@selector(stopRunner) withObject:nil afterDelay:10];
 //    [self performSelector:@selector(testChangeTextWidth) withObject:nil afterDelay:3];
 //    [self performSelector:@selector(testAppendText) withObject:nil afterDelay:3];
+//    [self testImageName];
 }
 
 - (void)testConfigFileReader {
@@ -274,6 +297,10 @@
 
 - (void)testAppendText {
     [[self statueItemView] setText:@"PPPPPPPPPPPPP OOOOOOOOOO" waitForPreviousFinishScrolling:YES];
+}
+
+- (void)testImageName {
+    NSLog(@"HighRes: %@", [NSString highResImageNameFromNormalResImageName:@"asdfioj"]);
 }
 
 @end

@@ -29,6 +29,7 @@
 		C14031BD1736839500FF4A85 /* ConfigFileReader.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031BC1736839500FF4A85 /* ConfigFileReader.m */; };
 		C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */; };
 		C14031C61736947700FF4A85 /* ScriptRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C51736947700FF4A85 /* ScriptRunner.m */; };
+		C1C47B90173FE00000E3CD9C /* NSString+ImageName.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C47B8F173FE00000E3CD9C /* NSString+ImageName.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+IZM_JSONSupport.m"; sourceTree = "<group>"; };
 		C14031C41736947700FF4A85 /* ScriptRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScriptRunner.h; sourceTree = "<group>"; };
 		C14031C51736947700FF4A85 /* ScriptRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptRunner.m; sourceTree = "<group>"; };
+		C1C47B8E173FE00000E3CD9C /* NSString+ImageName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ImageName.h"; sourceTree = "<group>"; };
+		C1C47B8F173FE00000E3CD9C /* NSString+ImageName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ImageName.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +214,8 @@
 				C14031BF173685F500FF4A85 /* INSPLogUtlils.h */,
 				C14031C01736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.h */,
 				C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */,
+				C1C47B8E173FE00000E3CD9C /* NSString+ImageName.h */,
+				C1C47B8F173FE00000E3CD9C /* NSString+ImageName.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				C14031C61736947700FF4A85 /* ScriptRunner.m in Sources */,
 				C132EDCA173742000082DABD /* LogGetter.m in Sources */,
 				C132EDD3173A44660082DABD /* PreferencesWindowController.m in Sources */,
+				C1C47B90173FE00000E3CD9C /* NSString+ImageName.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

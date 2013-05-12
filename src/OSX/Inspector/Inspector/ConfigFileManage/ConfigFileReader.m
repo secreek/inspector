@@ -9,6 +9,7 @@
 #import "ConfigFileReader.h"
 #import "INSPLogUtlils.h"
 #import "NSDictionary+IZM_JSONSupport.h"
+#import "NSString+ImageName.h"
 
 @interface ConfigFileReader ()
 
@@ -18,6 +19,8 @@
 
 @property (strong, nonatomic) NSImage *normalIcon;
 @property (strong, nonatomic) NSImage *errorIcon;
+@property (strong, nonatomic) NSImage *normalIcon2x;
+@property (strong, nonatomic) NSImage *errorIcon2x;
 @property (strong, nonatomic) NSString *logPath;
 @property (strong, nonatomic) NSString *command;
 @property (strong, nonatomic) NSString *scriptPath;
@@ -62,8 +65,11 @@
     
     // Images
     
-    NSString *iconNormalPath = [NSString stringWithFormat:@"%@/%@", _inspFolderPath, [_configDict objectForKey:@"icon-normal"]];
-    NSString *iconErrorPath = [NSString stringWithFormat:@"%@/%@", _inspFolderPath, [_configDict objectForKey:@"icon-error"]];
+    NSString *iconNormalFileName = [_configDict objectForKey:@"icon-normal"];
+    NSString *iconErrorFileName = [_configDict objectForKey:@"icon-error"];
+    
+    NSString *iconNormalPath = [NSString stringWithFormat:@"%@/%@", _inspFolderPath, iconNormalFileName];
+    NSString *iconErrorPath = [NSString stringWithFormat:@"%@/%@", _inspFolderPath, iconErrorFileName];
     
     self.normalIcon = [[NSImage alloc] initWithContentsOfFile:iconNormalPath];
     self.errorIcon = [[NSImage alloc] initWithContentsOfFile:iconErrorPath];
@@ -71,10 +77,20 @@
     if (!_normalIcon) {
         INSPALog(@"[WARNING]: Normal icon not found, use deafault!");
     }
-
+    
     if (!_errorIcon) {
         INSPALog(@"[WARNING]: Error icon not found, use deafault!");
     }
+    
+    // Images2x
+    
+    NSString *iconNormal2xFileName = [NSString highResImageNameFromNormalResImageName:iconNormalFileName];
+    NSString *iconError2xFileName = [NSString highResImageNameFromNormalResImageName:iconErrorFileName];
+    NSString *iconNormal2xPath = [NSString stringWithFormat:@"%@/%@", _inspFolderPath, iconNormal2xFileName];
+    NSString *iconError2xPath = [NSString stringWithFormat:@"%@/%@", _inspFolderPath, iconError2xFileName];
+    
+    self.normalIcon2x = [[NSImage alloc] initWithContentsOfFile:iconNormal2xPath];
+    self.errorIcon2x = [[NSImage alloc] initWithContentsOfFile:iconError2xPath];
     
     // Log path
     self.logPath = [_configDict objectForKey:@"log"];
@@ -114,6 +130,26 @@
         self.delay = [[_configDict objectForKey:@"delay"] floatValue];
         self.changeDelayWhenError = NO;
     }
+}
+
+@end
+
+@implementation ConfigFileReader (HighResSupport)
+
+- (NSImage *)normalIconForCurrentMainScreenResolution {
+    float factor = [[NSScreen mainScreen] backingScaleFactor];
+    if (factor > 1 && _normalIcon2x) {
+        return _normalIcon2x;
+    }
+    return _normalIcon;
+}
+
+- (NSImage *)errorIconForcurrentMainScreenResolution {
+    float factor = [[NSScreen mainScreen] backingScaleFactor];
+    if (factor > 1 && _errorIcon2x) {
+        return _errorIcon2x;
+    }
+    return _errorIcon;
 }
 
 @end
