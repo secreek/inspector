@@ -57,11 +57,21 @@ A configuration file is simply a JSON with some key-values:
 }
 ```
 
-## Launch
+## CLI
+
+### Launch
 
 ```
 $ insp diggo.insp
 ```
+
+### Create new bundle
+
+```
+$ insp new untitled.insp
+```
+
+This command simply copies a template in `inspector.app` to the target location.
 
 ## UI
 
