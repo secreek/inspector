@@ -89,7 +89,16 @@
     
     if (configFolderPath) {
         self.confFileReader = [[ConfigFileReader alloc] initWithInspFolderPath:configFolderPath];
-        self.runner = [[ScriptRunner alloc] initWithScriptPath:_confFileReader.scriptPath refresh:_confFileReader.refreshScript];
+        if (_confFileReader.scriptPath) {
+            self.runner = [[ScriptRunner alloc] initWithScriptPath:_confFileReader.scriptPath refresh:_confFileReader.refreshScript];
+        }
+        else if (_confFileReader.command){
+            self.runner = [[ScriptRunner alloc] initWithCommand:_confFileReader.command];
+        }
+        else {
+            return;
+        }
+        
         [_runner setDelegate:self];
         if (_confFileReader.changeDelayWhenError) {
             [_runner runWithTimeInterval:_confFileReader.normalDelay];
@@ -114,7 +123,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
-//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
+    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
 //    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
@@ -304,7 +313,7 @@
 }
 
 - (void)testCommandRunner {
-    _runner = [[ScriptRunner alloc] initWithCommand:@"ls -a"];
+    _runner = [[ScriptRunner alloc] initWithCommand:@"curl www.baidu.com"];
     
     [_runner runWithTimeInterval:2];
 }

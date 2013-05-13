@@ -101,17 +101,20 @@
     // Script && Command
     
     self.scriptPath = [_configDict objectForKey:@"script"];
-    if ([_scriptPath characterAtIndex:0] != '/') {
-        self.scriptPath = [NSString stringWithFormat:@"%@/%@", inspFolderPath, _scriptPath];
-    }
     
     if (!_scriptPath || [_scriptPath length] == 0) {
+        // Command
         self.command = [_configDict objectForKey:@"command"];
         if (!_command) {
             INSPALog(@"[ERROR]: Script/Comman not found.")
         }
     }
     else {
+        // Script
+        if ([_scriptPath characterAtIndex:0] != '/') {
+            self.scriptPath = [NSString stringWithFormat:@"%@/%@", inspFolderPath, _scriptPath];
+        }
+        
         NSString *refreshStr= [_configDict objectForKey:@"refresh-script"];
         if (refreshStr && [refreshStr caseInsensitiveCompare:@"true"] == NSOrderedSame) {
             self.refreshScript = YES;
