@@ -114,7 +114,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
-    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
+//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
 //    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
@@ -271,6 +271,12 @@
     }
 }
 
+#pragma mark - Terminate
+
+- (void)applicationWillTerminate:(NSNotification *)notification {
+    [ScriptRunner clearCache];
+}
+
 #pragma mark - For Tests
 
 - (void)runTest {
@@ -318,5 +324,7 @@
 - (void)testImageName {
     NSLog(@"HighRes: %@", [NSString highResImageNameFromNormalResImageName:@"asdfioj"]);
 }
+
+
 
 @end

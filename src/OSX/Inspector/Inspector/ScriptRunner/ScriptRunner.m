@@ -260,4 +260,27 @@
     });
 }
 
+#pragma mark - Class Method
+
++ (void)clearCache {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSError *error;
+    NSString* appID = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleIdentifier"];
+    NSURL *cacheDirURL = [manager URLForDirectory:NSCachesDirectory inDomain:NSUserDomainMask appropriateForURL:nil create:YES error:&error];
+    NSURL *appCacheDirURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/Script/", appID] relativeToURL:cacheDirURL];
+    
+    
+    NSArray *contents = [manager contentsOfDirectoryAtURL:appCacheDirURL includingPropertiesForKeys:nil options:NSDirectoryEnumerationSkipsHiddenFiles error:&error];
+    
+    if (error) {
+        INSPALog(@"%@", [error description]);
+    }
+    else {
+        for (NSURL *fileURL in contents) {
+            [manager removeItemAtURL:fileURL error:&error];
+        }
+    }
+    
+}
+
 @end

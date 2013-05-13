@@ -32,6 +32,8 @@ typedef enum {
 
 @property (assign, nonatomic) NSTimeInterval timeInterval;
 
++ (void)clearCache;
+
 - (id)initWithScriptPath:(NSString *)path refresh:(BOOL)refresh;
 - (id)initWithCommand:(NSString *)command;
 
