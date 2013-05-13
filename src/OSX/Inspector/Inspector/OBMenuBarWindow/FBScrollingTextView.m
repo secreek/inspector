@@ -8,7 +8,7 @@
 #import "FBScrollingTextView.h"
 #import <QuartzCore/QuartzCore.h>
 
-#define kFBScrollingTextViewSpacing 0.5
+#define kFBScrollingTextViewSpacing 0.7
 
 #define kFBScrollingTextViewDefaultScrollingSpeed 2
 #define kFBScrollingTextViewStartScrollingDelay 0.3

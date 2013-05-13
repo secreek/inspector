@@ -14,6 +14,7 @@
 #import "NSString+ImageName.h"
 
 #define INSP_V_APPENDERRORTEXT YES
+#define INSP_V_MAXTEXTWIDTH_RATIO 0.10
 
 @interface AppDelegate ()
 
@@ -52,6 +53,10 @@
     self.window.obDelegate = self;
     
     [[[self statueItemView] imageView] setImage:[NSImage imageNamed:@"MenuBarIcon"]];
+    
+    // reset max textWidth
+    
+    [[self statueItemView] setMaxTextWidth:[self mainScreenWidth] * INSP_V_MAXTEXTWIDTH_RATIO];
     
     // setup menu
     NSMenu *statusMenu = [[NSMenu alloc] initWithTitle:@"StatusMenu"];
@@ -109,7 +114,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
-//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
+    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
 //    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
@@ -141,6 +146,10 @@
 
 - (GSImageScrollingTextView *)statueItemView {
     return self.window.statusItemView;
+}
+
+- (CGFloat)mainScreenWidth {
+    return [[NSScreen mainScreen] frame].size.width;
 }
 
 #pragma mark - Menu
@@ -211,13 +220,20 @@
     // Rest image
     if (_lastStatusCode != 0) {
         // Error
-        [[[self statueItemView] imageView] setImage:[_confFileReader errorIconForcurrentMainScreenResolution]];
+        NSImage *errorIcon = [_confFileReader errorIconForcurrentMainScreenResolution];
+        if (errorIcon) {
+            [[[self statueItemView] imageView] setImage:errorIcon];
+        }
     }
     else {
         // Normal
-        [[[self statueItemView] imageView] setImage:[_confFileReader normalIconForCurrentMainScreenResolution]];
+        NSImage *normalIcon = [_confFileReader normalIconForCurrentMainScreenResolution];
+        if (normalIcon) {
+            [[[self statueItemView] imageView] setImage:normalIcon];
+        }
     }
     
+    [[self statueItemView] setMaxTextWidth:[self mainScreenWidth] * INSP_V_MAXTEXTWIDTH_RATIO];
 }
 
 #pragma mark - LogGetter delegate
