@@ -35,18 +35,18 @@
 - (id)initWithScriptPath:(NSString *)path refresh:(BOOL)refresh {
     self = [super init];
     if (self) {
-        self.type = ScriptRunnerType_Script;
+        _type = ScriptRunnerType_Script;
         
-        self.refreshScript = refresh;
+        _refreshScript = refresh;
         
         if ([path rangeOfString:@"://"].location == NSNotFound) {
-            self.scriptURL = [NSURL fileURLWithPath:path];
+            _scriptURL = [NSURL fileURLWithPath:path];
         }
         else {
-            self.scriptURL = [NSURL URLWithString:path];
+            _scriptURL = [NSURL URLWithString:path];
         }
         
-        self.scriptFileName = _scriptURL.lastPathComponent;
+        _scriptFileName = _scriptURL.lastPathComponent;
         
         NSLog(@"--%@", _scriptURL);
         NSLog(@"--%@", _scriptFileName);
@@ -59,9 +59,9 @@
 - (id)initWithCommand:(NSString *)command {
     self = [super init];
     if (self) {
-        self.type = ScriptRunnerType_Command;
+        _type = ScriptRunnerType_Command;
         
-        self.command = command;
+        _command = command;
         
         [self commonInitialize];
     }

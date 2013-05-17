@@ -37,9 +37,9 @@
 - (id)initWithInspFolderPath:(NSString *)path {
     self = [super init];
     if (self) {
-        self.fileManager = [[NSFileManager alloc] init];
+        _fileManager = [[NSFileManager alloc] init];
         
-        self.inspFolderPath = path;
+        _inspFolderPath = path;
     }
     return self;
 }

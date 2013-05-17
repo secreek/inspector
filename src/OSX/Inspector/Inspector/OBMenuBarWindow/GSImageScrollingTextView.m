@@ -21,11 +21,11 @@
 //        [self.layer setBorderWidth:1.0f];
 //        [self.layer setBorderColor:[[NSColor greenColor] CGColor]];
         
-        self.imageView = [[GSImageView alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
+        _imageView = [[GSImageView alloc] initWithFrame:CGRectMake(0, 0, 22, 22)];
         [_imageView setImageScaling:NSScaleProportionally];
         [_imageView setImageAlignment:NSImageAlignCenter];
         
-        self.scrollingTextView = [[FBScrollingTextView alloc] initWithFrame:CGRectMake(22, 0, width, 22)];
+        _scrollingTextView = [[FBScrollingTextView alloc] initWithFrame:CGRectMake(22, 0, width, 22)];
         [_scrollingTextView setString:@""];
         
         [self setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];
@@ -95,7 +95,6 @@
         [NSAnimationContext runAnimationGroup:^(NSAnimationContext *context) {
             [[self animator] setFrame:CGRectMake(0, 0, _scrollingTextView.frame.size.width + 22, 22)];
         } completionHandler:nil];
-
     }
     else {
         [self setText:text];
