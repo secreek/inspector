@@ -43,7 +43,7 @@
     
     [self checkArguments];
     
-    [self runTest];
+    // [self runTest];
 }
 
 - (void)setupVisualRelated {
@@ -123,7 +123,7 @@
     NSLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
-    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
+//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
 //    file = @"/Users/ultragtx/Desktop/test.insp";
     
     // Check if is *.insp
