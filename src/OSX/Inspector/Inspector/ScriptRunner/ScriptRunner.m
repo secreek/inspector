@@ -48,8 +48,8 @@
         
         _scriptFileName = _scriptURL.lastPathComponent;
         
-        NSLog(@"--%@", _scriptURL);
-        NSLog(@"--%@", _scriptFileName);
+        INSPDLog(@"--%@", _scriptURL);
+        INSPDLog(@"--%@", _scriptFileName);
         
         [self commonInitialize];
     }
@@ -113,20 +113,20 @@
         if (_type == ScriptRunnerType_Script) {
             dispatch_async(_excuteQueue, ^{
                 [NSThread sleepForTimeInterval:sleepTime];
-                NSLog(@"$$Running---");
+                INSPDLog(@"$$Running---");
                 [self runScript];
                 self.lastExecuteTime = [[NSDate date] timeIntervalSince1970];
-                NSLog(@"$$Finish----");
+                INSPDLog(@"$$Finish----");
                 [self asyncExecute];
             });
         }
         else {
             dispatch_async(_excuteQueue, ^{
                 [NSThread sleepForTimeInterval:sleepTime];
-                NSLog(@"$$Running---");
+                INSPDLog(@"$$Running---");
                 [self runCommand];
                 self.lastExecuteTime = [[NSDate date] timeIntervalSince1970];
-                NSLog(@"$$Finish----");
+                INSPDLog(@"$$Finish----");
                 [self asyncExecute];
             });
         }
@@ -152,7 +152,7 @@
         int randNum = rand();
         self.cachedScriptFileURL = [NSURL URLWithString:[NSString stringWithFormat:@"%.0lf_%d_%@", currentTime, randNum, _scriptFileName] relativeToURL:appCacheDirURL];
         
-        NSLog(@"%@", [_cachedScriptFileURL absoluteString]);
+        INSPDLog(@"%@", [_cachedScriptFileURL absoluteString]);
         
         // Save file content
         BOOL success = NO;
@@ -193,7 +193,7 @@
     [task waitUntilExit];
     NSData *data = [file readDataToEndOfFile];
     NSString *execResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"Execresult: \n[%@]", execResult);
+    INSPDLog(@"Execresult: \n[%@]", execResult);
     
     dispatch_sync(dispatch_get_main_queue(), ^{
         if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithStatusCode:result:)]) {
@@ -208,7 +208,7 @@
         
         if (self.lastOperation) {
             // cancle last to prevent old request arrive later than new request
-            NSLog(@"cancle last");
+            INSPDLog(@"cancle last");
             [_lastOperation cancel];
         }
         
@@ -216,7 +216,7 @@
         self.lastOperation = operation;
         [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
             self.scriptContent = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
-            NSLog(@"%@", _scriptContent);
+            INSPDLog(@"%@", _scriptContent);
             if ([_delegate respondsToSelector:@selector(scriptRunner:didGetScriptContent:)]) {
                 [_delegate scriptRunner:self didGetScriptContent:_scriptContent];
             }
@@ -251,7 +251,7 @@
     [task waitUntilExit];
     NSData *data = [file readDataToEndOfFile];
     NSString *execResult = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"Execresult: \n[%@]", execResult);
+    INSPDLog(@"Execresult: \n[%@]", execResult);
     
     dispatch_sync(dispatch_get_main_queue(), ^{
         if ([_delegate respondsToSelector:@selector(scriptRunner:didFinishExecutionWithStatusCode:result:)]) {

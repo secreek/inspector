@@ -12,6 +12,7 @@
 #import "ConfigFileReader.h"
 #import "PreferencesWindowController.h"
 #import "NSString+ImageName.h"
+#import "INSPLogUtlils.h"
 
 #define INSP_V_APPENDERRORTEXT YES
 #define INSP_V_MAXTEXTWIDTH_RATIO 0.10
@@ -119,8 +120,8 @@
     NSString *file = [args lastObject];
     NSString *pwd = [env objectForKey:@"PWD"];
     
-    NSLog(@"file:[%@]", file);
-    NSLog(@"pwd:[%@]", pwd);
+    INSPDLog(@"file:[%@]", file);
+    INSPDLog(@"pwd:[%@]", pwd);
     
     // TODO: test only remove later
 //    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
@@ -129,10 +130,10 @@
     // Check if is *.insp
     if (file.length > 5) {
         NSRange tailRange = NSMakeRange([file length] - 5, 5);
-        NSLog(@"%@", NSStringFromRange(tailRange));
+        INSPDLog(@"%@", NSStringFromRange(tailRange));
         NSRange resultRange = [file rangeOfString:@".insp" options:NSCaseInsensitiveSearch range:tailRange];
         if (resultRange.location != NSNotFound) {
-            NSLog(@"avaliable insp folder");
+            INSPDLog(@"avaliable insp folder");
             
             NSString *fullPath;
             if ([file characterAtIndex:0] == '/') {
@@ -195,7 +196,7 @@
 - (void)setLastStatusCode:(int)statusCode {
     if (statusCode != 0) {
         // Error
-        NSLog(@"Get Error");
+        INSPDLog(@"Get Error");
         [[[self statueItemView] imageView] setImage:[_confFileReader errorIconForcurrentMainScreenResolution]];
         [_logGetter startGettinglogContentWithPath:_confFileReader.logPath];
         if (_confFileReader.changeDelayWhenError) {
@@ -268,8 +269,12 @@
 }
 
 - (void)logGetter:(LogGetter *)logGetter didFailWithError:(NSError *)error {
-    NSAlert *alert = [NSAlert alertWithError:error];
-    [alert runModal];
+//    NSAlert *alert = [NSAlert alertWithError:error];
+//    [alert runModal];
+    
+    // If logfile cannot be reached, show the error in the textView
+    // Mostly the reason is the log file has not been created.
+    [_logTextView setString:[error description]];
 }
 
 #pragma mark - OBMenuBarWindow delegate

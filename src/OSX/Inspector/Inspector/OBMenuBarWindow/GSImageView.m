@@ -29,4 +29,11 @@
     [self.superview rightMouseDown:theEvent];
 }
 
+- (void)setImage:(NSImage *)newImage {
+    if (newImage == nil) {
+        return;
+    }
+    [super setImage:newImage];
+}
+
 @end

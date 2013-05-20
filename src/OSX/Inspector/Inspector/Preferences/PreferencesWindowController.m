@@ -85,7 +85,7 @@
 //        script = [NSString stringWithFormat:@"", execBinaryPath, STR_SHELLSUPPORT_PATH];
         
         script = [NSString stringWithFormat:@"printf \"#! /bin/bash \\n%@ \\$1 &\" > %@", execBinaryPath, STR_SHELLSUPPORT_PATH];
-        NSLog(@"%@", script);
+        INSPDLog(@"%@", script);
         
     }
     

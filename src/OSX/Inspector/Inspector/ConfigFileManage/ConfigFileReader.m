@@ -39,7 +39,7 @@
     if (self) {
         _fileManager = [[NSFileManager alloc] init];
         
-        _inspFolderPath = path;
+        [self setInspFolderPath:path];
     }
     return self;
 }
@@ -50,18 +50,18 @@
     NSError *error;
     
     // NSArray *inspContents = [_fileManager contentsOfDirectoryAtPath:inspFolderPath error:&error];
-    // NSLog(@"%@", [inspContents description]);
+    // INSPDLog(@"%@", [inspContents description]);
     
     if (error) {
         INSPALog(@"%@", [error description]);
     }
     
     NSString *configFilePath = [NSString stringWithFormat:@"%@/config.json", _inspFolderPath];
-    NSLog(@"%@", configFilePath);
+    INSPDLog(@"%@", configFilePath);
     
     self.configDict = [NSDictionary izm_dictionaryWithContentsOfJSONFilePath:configFilePath];
     
-    NSLog(@"%@", [_configDict description]);
+    INSPDLog(@"%@", [_configDict description]);
     
     // Images
     
