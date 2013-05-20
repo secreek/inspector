@@ -30,7 +30,23 @@
 		C14031C21736882B00FF4A85 /* NSDictionary+IZM_JSONSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C11736882A00FF4A85 /* NSDictionary+IZM_JSONSupport.m */; };
 		C14031C61736947700FF4A85 /* ScriptRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = C14031C51736947700FF4A85 /* ScriptRunner.m */; };
 		C1C47B90173FE00000E3CD9C /* NSString+ImageName.m in Sources */ = {isa = PBXBuildFile; fileRef = C1C47B8F173FE00000E3CD9C /* NSString+ImageName.m */; };
+		C1FC42CC1749BC5500E45CE2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C1FC42CB1749BC5500E45CE2 /* SenTestingKit.framework */; };
+		C1FC42CD1749BC5500E45CE2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C140317B1733F2F200FF4A85 /* Cocoa.framework */; };
+		C1FC42D31749BC5500E45CE2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C1FC42D11749BC5500E45CE2 /* InfoPlist.strings */; };
+		C1FC42D61749BC5500E45CE2 /* InspectorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C1FC42D51749BC5500E45CE2 /* InspectorTests.m */; };
+		C1FC42F91749D5F400E45CE2 /* script.insp in Resources */ = {isa = PBXBuildFile; fileRef = C1FC42F71749D5F400E45CE2 /* script.insp */; };
+		C1FC42FA1749D5F400E45CE2 /* command.insp in Resources */ = {isa = PBXBuildFile; fileRef = C1FC42F81749D5F400E45CE2 /* command.insp */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C1FC42DB1749BCE300E45CE2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C14031701733F2F200FF4A85 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C14031771733F2F200FF4A85;
+			remoteInfo = Inspector;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		5B03BD546F294361ADD31925 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
@@ -76,6 +92,15 @@
 		C14031C51736947700FF4A85 /* ScriptRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScriptRunner.m; sourceTree = "<group>"; };
 		C1C47B8E173FE00000E3CD9C /* NSString+ImageName.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+ImageName.h"; sourceTree = "<group>"; };
 		C1C47B8F173FE00000E3CD9C /* NSString+ImageName.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ImageName.m"; sourceTree = "<group>"; };
+		C1FC42CA1749BC5500E45CE2 /* InspectorTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = InspectorTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1FC42CB1749BC5500E45CE2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C1FC42D01749BC5500E45CE2 /* InspectorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "InspectorTests-Info.plist"; sourceTree = "<group>"; };
+		C1FC42D21749BC5500E45CE2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C1FC42D41749BC5500E45CE2 /* InspectorTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InspectorTests.h; sourceTree = "<group>"; };
+		C1FC42D51749BC5500E45CE2 /* InspectorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InspectorTests.m; sourceTree = "<group>"; };
+		C1FC42D71749BC5500E45CE2 /* InspectorTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "InspectorTests-Prefix.pch"; sourceTree = "<group>"; };
+		C1FC42F71749D5F400E45CE2 /* script.insp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = script.insp; sourceTree = "<group>"; };
+		C1FC42F81749D5F400E45CE2 /* command.insp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = command.insp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +113,15 @@
 				C14031A91734CBF800FF4A85 /* QuartzCore.framework in Frameworks */,
 				C140317C1733F2F200FF4A85 /* Cocoa.framework in Frameworks */,
 				838AD1D6564D40C184C756B7 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1FC42C61749BC5500E45CE2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1FC42CC1749BC5500E45CE2 /* SenTestingKit.framework in Frameworks */,
+				C1FC42CD1749BC5500E45CE2 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +143,7 @@
 			children = (
 				C132EDD7173B290F0082DABD /* TODO.md */,
 				C14031811733F2F200FF4A85 /* Inspector */,
+				C1FC42CE1749BC5500E45CE2 /* InspectorTests */,
 				C140317A1733F2F200FF4A85 /* Frameworks */,
 				C14031791733F2F200FF4A85 /* Products */,
 				5B03BD546F294361ADD31925 /* Pods.xcconfig */,
@@ -119,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				C14031781733F2F200FF4A85 /* Inspector.app */,
+				C1FC42CA1749BC5500E45CE2 /* InspectorTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -130,6 +166,7 @@
 				C132EDC617373D6C0082DABD /* SystemConfiguration.framework */,
 				C14031A81734CBF800FF4A85 /* QuartzCore.framework */,
 				C140317B1733F2F200FF4A85 /* Cocoa.framework */,
+				C1FC42CB1749BC5500E45CE2 /* SenTestingKit.framework */,
 				C140317D1733F2F200FF4A85 /* Other Frameworks */,
 				71EFCA0DFCB0469B8D3179C3 /* libPods.a */,
 			);
@@ -231,6 +268,44 @@
 			path = ScriptRunner;
 			sourceTree = "<group>";
 		};
+		C1FC42CE1749BC5500E45CE2 /* InspectorTests */ = {
+			isa = PBXGroup;
+			children = (
+				C1FC42DF1749C85400E45CE2 /* Resources */,
+				C1FC42D41749BC5500E45CE2 /* InspectorTests.h */,
+				C1FC42D51749BC5500E45CE2 /* InspectorTests.m */,
+				C1FC42CF1749BC5500E45CE2 /* Supporting Files */,
+			);
+			path = InspectorTests;
+			sourceTree = "<group>";
+		};
+		C1FC42CF1749BC5500E45CE2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C1FC42D01749BC5500E45CE2 /* InspectorTests-Info.plist */,
+				C1FC42D11749BC5500E45CE2 /* InfoPlist.strings */,
+				C1FC42D71749BC5500E45CE2 /* InspectorTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C1FC42DF1749C85400E45CE2 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C1FC42E01749C85400E45CE2 /* FakeInspFolder */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C1FC42E01749C85400E45CE2 /* FakeInspFolder */ = {
+			isa = PBXGroup;
+			children = (
+				C1FC42F71749D5F400E45CE2 /* script.insp */,
+				C1FC42F81749D5F400E45CE2 /* command.insp */,
+			);
+			path = FakeInspFolder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -251,6 +326,25 @@
 			productName = Inspector;
 			productReference = C14031781733F2F200FF4A85 /* Inspector.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C1FC42C91749BC5500E45CE2 /* InspectorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C1FC42DA1749BC5500E45CE2 /* Build configuration list for PBXNativeTarget "InspectorTests" */;
+			buildPhases = (
+				C1FC42C51749BC5500E45CE2 /* Sources */,
+				C1FC42C61749BC5500E45CE2 /* Frameworks */,
+				C1FC42C71749BC5500E45CE2 /* Resources */,
+				C1FC42C81749BC5500E45CE2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C1FC42DC1749BCE300E45CE2 /* PBXTargetDependency */,
+			);
+			name = InspectorTests;
+			productName = InspectorTests;
+			productReference = C1FC42CA1749BC5500E45CE2 /* InspectorTests.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -274,6 +368,7 @@
 			projectRoot = "";
 			targets = (
 				C14031771733F2F200FF4A85 /* Inspector */,
+				C1FC42C91749BC5500E45CE2 /* InspectorTests */,
 			);
 		};
 /* End PBXProject section */
@@ -289,6 +384,16 @@
 				C140319E1733F5BD00FF4A85 /* MenuBarIcon.png in Resources */,
 				C14031A01733F5E100FF4A85 /* MenuBarIcon2.png in Resources */,
 				C132EDD4173A44660082DABD /* PreferencesWindowController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C1FC42C71749BC5500E45CE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1FC42D31749BC5500E45CE2 /* InfoPlist.strings in Resources */,
+				C1FC42F91749D5F400E45CE2 /* script.insp in Resources */,
+				C1FC42FA1749D5F400E45CE2 /* command.insp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +413,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+		C1FC42C81749BC5500E45CE2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -331,7 +449,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C1FC42C51749BC5500E45CE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C1FC42D61749BC5500E45CE2 /* InspectorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C1FC42DC1749BCE300E45CE2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C14031771733F2F200FF4A85 /* Inspector */;
+			targetProxy = C1FC42DB1749BCE300E45CE2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		C14031841733F2F200FF4A85 /* InfoPlist.strings */ = {
@@ -356,6 +490,14 @@
 				C14031911733F2F200FF4A85 /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		C1FC42D11749BC5500E45CE2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C1FC42D21749BC5500E45CE2 /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -446,6 +588,40 @@
 			};
 			name = Release;
 		};
+		C1FC42D81749BC5500E45CE2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Inspector.app/Contents/MacOS/Inspector";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InspectorTests/InspectorTests-Prefix.pch";
+				INFOPLIST_FILE = "InspectorTests/InspectorTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Inspector.app/Contents/MacOS/Inspector";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		C1FC42D91749BC5500E45CE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Inspector.app/Contents/MacOS/Inspector";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "InspectorTests/InspectorTests-Prefix.pch";
+				INFOPLIST_FILE = "InspectorTests/InspectorTests-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Inspector.app/Contents/MacOS/Inspector";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -463,6 +639,15 @@
 			buildConfigurations = (
 				C14031961733F2F200FF4A85 /* Debug */,
 				C14031971733F2F200FF4A85 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C1FC42DA1749BC5500E45CE2 /* Build configuration list for PBXNativeTarget "InspectorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C1FC42D81749BC5500E45CE2 /* Debug */,
+				C1FC42D91749BC5500E45CE2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

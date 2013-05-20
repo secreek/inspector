@@ -1,0 +1,9 @@
+{
+    "icon-normal": "ico-launch-normal.png",
+    "icon-error": "ico-launch-error.png",
+    "normal-delay": "10",
+	"error-delay": "1",
+    "script": "check.sh",
+    "refresh-script": "true",
+    "log": "/tmp/log.log"
+}

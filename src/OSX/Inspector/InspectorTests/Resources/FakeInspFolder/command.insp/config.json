@@ -1,0 +1,8 @@
+{ 
+	"icon-normal": "ico-launch-normal.png", 
+	"icon-error": "ico-launch-error.png", 
+	"delay": "10", 
+	"command": "curl --head --socks5 127.0.0.1:1080 www.youtube.com",
+	"refresh-script": "false", 
+	"log": "/tmp/log.log" 
+}
