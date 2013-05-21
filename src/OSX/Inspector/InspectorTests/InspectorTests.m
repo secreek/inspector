@@ -56,7 +56,7 @@
     STAssertNotNil(configFileReader.logPath, @"log path mismatch");
 }
 
-- (void)testScriptRunnerScript {
+- (void)testScriptRunnerScriptAndLogGetter {
     NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"script" ofType:@"sh"];
     ScriptRunner *runner = [[ScriptRunner alloc] initWithScriptPath:path refresh:YES];
     [runner setDelegate:self];
@@ -66,6 +66,15 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     _scriptFinishRunning = NO;
+    
+    LogGetter *logGetter = [[LogGetter alloc] init];
+    [logGetter setDelegate:self];
+    [logGetter startGettinglogContentWithPath:@"/tmp/FakeLog.log"];
+    
+    while (!_logFinishGetting) {
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    }
+    _logFinishGetting = NO;
 }
 
 - (void)testScriptRunnerCommand {
@@ -78,17 +87,6 @@
         [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
     }
     _scriptFinishRunning = NO;
-}
-
-- (void)testLogGetter {
-    LogGetter *logGetter = [[LogGetter alloc] init];
-    [logGetter setDelegate:self];
-    [logGetter startGettinglogContentWithPath:@"/tmp/FakeLog.log"];
-    
-    while (!_logFinishGetting) {
-        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
-    }
-    _logFinishGetting = NO;
 }
 
 - (void)testCommandLine {
