@@ -123,10 +123,6 @@
     INSPDLog(@"file:[%@]", file);
     INSPDLog(@"pwd:[%@]", pwd);
     
-    // TODO: test only remove later
-//    file = @"/Users/ultragtx/DevProjects/Cocoa/Project/inspector/src/test/apollo13.insp";
-//    file = @"/Users/ultragtx/Desktop/test.insp";
-    
     // Check if is *.insp
     if (file.length > 5) {
         NSRange tailRange = NSMakeRange([file length] - 5, 5);
